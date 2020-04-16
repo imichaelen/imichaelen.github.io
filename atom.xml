@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://imichaelen.github.io</id>
     <title>Michael Shen&apos;s Personal Blog</title>
-    <updated>2020-04-16T01:05:51.899Z</updated>
+    <updated>2020-04-16T01:12:49.383Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://imichaelen.github.io"/>
     <link rel="self" href="https://imichaelen.github.io/atom.xml"/>
@@ -10,4 +10,19 @@
     <logo>https://imichaelen.github.io/images/avatar.png</logo>
     <icon>https://imichaelen.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Michael Shen&apos;s Personal Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[About]]></title>
+        <id>https://imichaelen.github.io/post/about/</id>
+        <link href="https://imichaelen.github.io/post/about/">
+        </link>
+        <updated>2020-04-16T01:09:17.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>Welcome to my blog. Hope you can feel happy after leaving.</p>
+</blockquote>
+<h2 id="about-this-blog">🏠 About this blog</h2>
+<h2 id="who-is-the-writer">👨‍💻 Who is the writer</h2>
+<h2 id="what-eles-do-i-want-to-say">⛹ What eles do I want to say</h2>
+<h2 id="contact-me">📬 Contact me</h2>
+]]></content>
+    </entry>
 </feed>
