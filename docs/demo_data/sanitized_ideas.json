@@ -1,0 +1,24 @@
+[
+  {
+    "id": "idea_1",
+    "title": "Strain-Engineered Magnetic Anisotropy and Spin Transport in Janus CrXY (X,Y = S, Se, Te) Monolayers for 2D Spintronics",
+    "summary": "This research investigates the effect of biaxial strain on magnetic anisotropy energy and spin transport properties in Janus transition metal dichalcogenide monolayers CrXY (X,Y = S, Se, Te). The asymmetric structure of Janus materials breaks inversion...",
+    "hypothesis": "Janus CrXY monolayers will exhibit enhanced and tunable magnetic anisotropy energy under strain due to broken inversion symmetry and strain-modified orbital hybridization, making them promising candidates for...",
+    "score": 0.482,
+    "novelty": 0.667,
+    "feasibility": 0.15,
+    "depth": 0,
+    "is_top": true
+  },
+  {
+    "id": "idea_6",
+    "title": "Electric Field and Strain Co-modulation of Magnetic Anisotropy in Janus CrXY Heterostructures for Voltage-Controlled Spintronics",
+    "summary": "This research extends the strain engineering concept by incorporating external electric fields to create a dual-gating approach for controlling magnetic anisotropy in Janus CrXY monolayers. By combining biaxial strain with perpendicular electric fields, we...",
+    "hypothesis": "The combination of biaxial strain and external electric fields will enable non-volatile switching of magnetic anisotropy (MAE > 2 meV/Cr) in Janus CrXY monolayers, with the electric field sensitivity following the trend...",
+    "score": 0.434,
+    "novelty": 0.667,
+    "feasibility": 0.15,
+    "depth": 1,
+    "is_top": true
+  }
+]

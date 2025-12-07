@@ -1,0 +1,110 @@
+[
+  {
+    "idea_title": "Strain-Engineered Magnetic Anisotropy and Spin Transport in Janus CrXY (X,Y = S, Se, Te) Monolayers for 2D Spintronics",
+    "workflow_title": "Computational Workflow for Strain-Dependent Magnetic Properties in Janus CrXY Monolayers",
+    "selected_idea_id": "idea_1",
+    "summary": "This workflow is designed to systematically test the hypothesis that Janus CrXY monolayers exhibit enhanced and tunable magnetic anisotropy energy (MAE) under biaxial strain due to broken inversion symmetry and strain-modified orbital hybridization. The asymmetric structure of Janus materials (CrSSe, CrSTe, CrSeTe) breaks inversion symmetry, which can enhance spin-orbit...",
+    "methods": "Spin-polarized DFT+U with van der Waals corrections (DFT-D3) as specified. Use the projector-augmented wave (PAW) method in VASP. For exchange-correlation, employ the Perdew-Burke-Ernzerhof (PBE) functional with Hubbard U correction (Ueff = U - J) applied to...",
+    "risks": "Moderate to high risks. Key risks include: 1) Computational cost: DFT+U with SOC and strain sweeps is resource-intensive (weeks of CPU time). 2) Parameter sensitivity: MAE and Tc depend heavily on U value and k-point convergence; inaccurate U can lead to...",
+    "professor_steps": [
+      {
+        "number": 1,
+        "title": "Structure Preparation and Validation"
+      },
+      {
+        "number": 2,
+        "title": "Strain Application and Structural Relaxation"
+      },
+      {
+        "number": 3,
+        "title": "Magnetic Anisotropy Energy (MAE) Calculation"
+      },
+      {
+        "number": 4,
+        "title": "Electronic Structure Analysis"
+      },
+      {
+        "number": 5,
+        "title": "Curie Temperature Estimation"
+      },
+      {
+        "number": 6,
+        "title": "Spin Transport Properties Calculation"
+      },
+      {
+        "number": 7,
+        "title": "Data Analysis and Hypothesis Testing"
+      }
+    ],
+    "technician_steps": [
+      {
+        "order": 1,
+        "title": "Generate initial Janus CrXY (X,Y = S, Se, Te) monolayer structures",
+        "kind": "structure_generation"
+      },
+      {
+        "order": 1,
+        "title": "Relax initial Janus structures to validate stability and obtain equilibrium geometry",
+        "kind": "vasp_relaxation"
+      },
+      {
+        "order": 2,
+        "title": "Loop over strain values from -8% to +8% in 2% increments",
+        "kind": "loop"
+      },
+      {
+        "order": 2,
+        "title": "Apply biaxial strain to relaxed structure",
+        "kind": "structure_generation"
+      },
+      {
+        "order": 2,
+        "title": "Relax ionic positions under fixed strained lattice",
+        "kind": "vasp_relaxation"
+      },
+      {
+        "order": 3,
+        "title": "Calculate MAE for strained structure with SOC for two magnetization directions",
+        "kind": "vasp_scf"
+      },
+      {
+        "order": 4,
+        "title": "Calculate band structure and DOS for strained system",
+        "kind": "vasp_band"
+      },
+      {
+        "order": 5,
+        "title": "Calculate exchange parameters for Heisenberg model via energy mapping",
+        "kind": "vasp_scf"
+      },
+      {
+        "order": 5,
+        "title": "Perform Monte Carlo simulation to estimate Curie temperature",
+        "kind": "python_analysis"
+      },
+      {
+        "order": 6,
+        "title": "SCF calculation for Wannier90 initialization",
+        "kind": "vasp_scf"
+      },
+      {
+        "order": 7,
+        "title": "Collect and analyze all strain-dependent data",
+        "kind": "python_analysis"
+      }
+    ],
+    "scores": {
+      "average_score": 8.2,
+      "feasibility": "Medium",
+      "impact_potential": "High",
+      "consensus": "Strong"
+    },
+    "metrics": {
+      "steps_completed": 4,
+      "steps_total": 11,
+      "duration_hours": 3.28,
+      "executor": "llm_orchestrator",
+      "timestamp": "2025-12-06T04:16:44.872542"
+    }
+  }
+]

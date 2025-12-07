@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About | Michael Shen&#39;s Personal Blog</title>
+    <title>Demo | Michael Shen&#39;s Personal Blog</title>
     <link
       rel="shortcut icon"
       href="https://imichaelen.github.io/favicon.ico?v=1588008319075"
@@ -18,7 +18,7 @@
     <link
       rel="alternate"
       type="application/atom+xml"
-      title="About | Michael Shen&#39;s Personal Blog - Atom Feed"
+      title="Demo | Michael Shen&#39;s Personal Blog - Atom Feed"
       href="https://imichaelen.github.io/atom.xml"
     />
     <link
@@ -42,14 +42,9 @@
 
     <meta
       name="description"
-      content="
-Welcome to my blog. Hope you can feel happy after leaving.
-
-Contact me
-Email: imichaelen@gmail.com
-..."
+      content="Interactive demonstration of an autonomous computational research workflow, showing how ideas move from high-level questions to completed simulations."
     />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="demo,visualization,AI,research" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"
@@ -96,56 +91,78 @@ Email: imichaelen@gmail.com
 
         <div class="post-detail">
           <article class="post">
-            <h2 class="post-title">About</h2>
+            <h2 class="post-title">Demo</h2>
             <div class="post-info">
-              <span> 2020-04-16 </span>
+              <span> 2025-12-07 </span>
               <span> 1 min read </span>
             </div>
 
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-                  <p>
-                    Welcome to my blog. Hope you can feel happy after leaving.
-                  </p>
-                </blockquote>
-                <h2 id="contact-me">Contact me</h2>
-                <p>Email: imichaelen@gmail.com</p>
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
+                <h2 id="autonomous-research-workflow-visualization">
+                  Autonomous Computational Research Workflow (Demo)
+                </h2>
+                <p>
+                  This interactive demo illustrates a prototype end-to-end
+                  workflow for autonomous computational research. It focuses on
+                  how high-level ideas are generated, selected, planned, and
+                  translated into concrete simulation workflows, rather than on
+                  any specific unpublished scientific results.
+                </p>
+
+                <p><strong>What this demo shows:</strong></p>
+                <ul>
                   <li>
-                    <ul>
-                      <li><a href="#contact-me">Contact me</a></li>
-                    </ul>
+                    📊 An interactive idea tree that organizes related research
+                    directions.
+                  </li>
+                  <li>
+                    ⏱️ A high-level workflow timeline and execution history.
+                  </li>
+                  <li>
+                    🔬 How qualitative research questions are mapped onto
+                    families of computational experiments (e.g., structure
+                    generation, relaxation, property evaluation) without
+                    exposing implementation details.
+                  </li>
+                  <li>
+                    🤖 AI-assisted research planning and coordination of
+                    simulation tasks, shown at the level of prompts, states, and
+                    outcomes.
                   </li>
                 </ul>
+
+                <p style="margin-top: 2em; text-align: center">
+                  <a
+                    href="/docs/"
+                    style="
+                      display: inline-block;
+                      padding: 12px 24px;
+                      background-color: #4caf50;
+                      color: white;
+                      text-decoration: none;
+                      border-radius: 4px;
+                      font-weight: bold;
+                      font-size: 1.1em;
+                    "
+                  >
+                    🚀 View Workflow Demo (Static, Sanitized)
+                  </a>
+                </p>
+
+                <p style="margin-top: 2em; color: #666">
+                  <em>
+                    Note: This demo is a fully static, sanitized visualization
+                    of a single prototype workflow. It is intended only to
+                    illustrate process and capabilities at a high level. All
+                    data is embedded locally, and no external services are
+                    contacted.
+                  </em>
+                </p>
               </div>
             </div>
           </article>
         </div>
-
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/gitalk/dist/gitalk.css"
-        />
-        <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-        <div id="gitalk-container"></div>
-
-        <script>
-          var gitalk = new Gitalk({
-            clientID: "a5e6f6ea93722a200403",
-            clientSecret: "0b51983f55aa43a6a1376e52a5f9e5099bdfb23c",
-            repo: "imichaelen.github.io",
-            owner: "imichaelen",
-            admin: ["imichaelen"],
-            id: location.pathname.substring(0, 49), // Ensure uniqueness and length less than 50
-            distractionFreeMode: false, // Facebook-like distraction free mode
-          });
-
-          gitalk.render("gitalk-container");
-        </script>
 
         <div class="site-footer">
           <a
@@ -161,46 +178,6 @@ Email: imichaelen@gmail.com
 
     <script>
       hljs.initHighlightingOnLoad();
-
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
-
-      window.addEventListener("scroll", (event) => {
-        let fromTop = window.scrollY;
-
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(
-            decodeURI(link.hash).substring(1)
-          );
-          let nextSection = null;
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(
-              decodeURI(mainNavLinks[index + 1].hash).substring(1)
-            );
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
     </script>
   </body>
 </html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autonomous Computational Research Workflow Demo</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body class="noise-overlay">
+    <div class="page">
+      <header class="hero">
+        <div class="eyebrow">Autonomous computational research</div>
+        <h1>Static Demo</h1>
+        <p>
+          This page presents a static, sanitized demonstration of an AI-assisted
+          computational research workflow.
+        </p>
+        <p class="subhead">
+          Demo prepared by <strong>Chenyu Shen</strong>, Institute of Science
+          Tokyo, Department of Materials Science and Engineering.
+        </p>
+        <div class="badges">
+          <div class="badge">
+            Topic:
+            <strong id="badge-topic">Example condensed-matter project</strong>
+          </div>
+          <div class="badge">
+            Idea nodes: <strong id="badge-interactive">--</strong>
+          </div>
+          <div class="badge">
+            Workflow steps: <strong id="badge-steps">--</strong>
+          </div>
+          <div class="badge">
+            Execution events: <strong id="badge-events">--</strong>
+          </div>
+          <div class="badge">
+            Timeline span: <strong id="badge-duration">--</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="section" id="section-topic">
+        <h2>1. Starting Topic</h2>
+        <p class="subhead">
+          Derived from an internal project prompt, summarized here at a high
+          level.
+        </p>
+        <div class="section-grid">
+          <div class="card" id="topic-card"></div>
+          <div class="card">
+            <h3>Search Parameters</h3>
+            <div class="metric-row" id="topic-stats"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="section-tree">
+        <h2>2. Idea Generation</h2>
+        <p class="subhead">
+          Ideas expand from left to right starting at the topic. Colors
+          distinguish the root topic, highlighted candidate directions, and
+          supporting branches, without exposing low-level model settings or
+          scoring details.
+        </p>
+        <div class="scroll-hint">← Scroll horizontally to explore ideas →</div>
+        <div class="tree-container" id="treeContainer">
+          <button class="tree-nav tree-nav-left" aria-label="Scroll left">
+            ‹
+          </button>
+          <div class="tree-scroll-wrapper" id="treeScroll">
+            <div id="idea-tree"></div>
+          </div>
+          <button class="tree-nav tree-nav-right" aria-label="Scroll right">
+            ›
+          </button>
+          <div class="tree-fade tree-fade-left"></div>
+          <div class="tree-fade tree-fade-right"></div>
+        </div>
+        <div class="tree-legend">
+          <span class="legend-item"
+            ><span class="legend-color root"></span> Root Topic</span
+          >
+          <span class="legend-item"
+            ><span class="legend-color top-idea"></span> Top Ideas</span
+          >
+          <span class="legend-item"
+            ><span class="legend-color other"></span> Other Ideas</span
+          >
+        </div>
+        <div class="idea-detail" id="idea-detail"></div>
+      </section>
+
+      <section class="section" id="section-idea">
+        <h2>3. Selected Idea</h2>
+        <p class="subhead">
+          Illustrative reasons why this direction is prioritised, focusing on
+          conceptual novelty, feasibility, and clarity of scientific story.
+        </p>
+        <div id="selected-idea"></div>
+      </section>
+
+      <section class="section" id="section-planning">
+        <h2>4. Research Planning</h2>
+        <p class="subhead">
+          High-level planning "as a professor": how hypotheses, broad methods,
+          and evaluation criteria are structured before any concrete jobs are
+          launched.
+        </p>
+        <div id="planning-content"></div>
+      </section>
+
+      <section class="section" id="section-workflow">
+        <h2>5. Workflow Execution</h2>
+        <p class="subhead">
+          Technician-style workflow and AI orchestration, shown as a sequence of
+          abstract tasks, prompts, and status updates rather than detailed
+          scripts or configurations.
+        </p>
+        <button class="journey-btn" id="journey-btn">Follow the Journey</button>
+        <div class="workflow-summary" id="workflow-meta"></div>
+        <div class="timeline journey-list" id="journey-timeline"></div>
+        <h3>Orchestrator Interactions</h3>
+        <div class="timeline" id="fpilot-timeline"></div>
+      </section>
+
+      <section class="section" id="section-results">
+        <h2>6. Results & Insights</h2>
+        <p class="subhead">
+          Aggregate execution status, qualitative signals, and example next
+          steps, deliberately omitting any unpublished numerical results or
+          specific parameter choices.
+        </p>
+        <div class="results-grid" id="results-grid"></div>
+      </section>
+
+      <section class="section">
+        <h2>About</h2>
+        <p style="text-align: center; margin: 2em auto; max-width: 600px;">
+          This demonstration showcases a prototype workflow for autonomous
+          computational research. All data shown is sanitized and intended
+          only to illustrate high-level process and capabilities.
+        </p>
+        <div class="footer">
+          <strong>Chenyu Shen</strong><br />
+          Institute of Science Tokyo<br />
+          Department of Materials Science and Engineering
+        </div>
+      </section>
+    </div>
+
+    <script src="demo_data/sanitized_data.js"></script>
+    <script src="assets/js/d3.v7.min.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+  </body>
+</html>
