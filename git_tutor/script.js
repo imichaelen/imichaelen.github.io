@@ -96,22 +96,30 @@
   // Command-line parsing (minimal)
   // -----------------------------
 
-  // Splits a command line into tokens. Supports basic "double quotes".
+  // Splits a command line into tokens. Supports basic single and double quotes.
   function splitArgs(line) {
     const input = String(line || "").trim();
     if (!input) return [];
 
     const tokens = [];
     let current = "";
-    let inQuotes = false;
+    let quote = null;
 
     for (let i = 0; i < input.length; i++) {
       const ch = input[i];
-      if (ch === '"') {
-        inQuotes = !inQuotes;
+      if (quote) {
+        if (ch === quote) {
+          quote = null;
+          continue;
+        }
+        current += ch;
         continue;
       }
-      if (!inQuotes && /\s/.test(ch)) {
+      if (ch === '"' || ch === "'") {
+        quote = ch;
+        continue;
+      }
+      if (/\s/.test(ch)) {
         if (current.length) tokens.push(current);
         current = "";
         continue;
@@ -131,7 +139,7 @@
 
     const left = trimmed.slice(0, idx).trim();
     const right = trimmed.slice(idx + 1).trim();
-    const fileArg = right.replace(/^"+|"+$/g, "");
+    const fileArg = right.replace(/^['"]+|['"]+$/g, "");
 
     const leftTokens = splitArgs(left);
     // leftTokens[0] === "echo"
@@ -1408,7 +1416,12 @@
           title: "View the file",
           text: `Run <code>cat README.md</code> to print its contents.`,
           hint: `Type <code>cat README.md</code>.`,
-          validate: ({ command }) => command.trim() === "cat README.md",
+          validate: ({ command }) => {
+            const tokens = splitArgs(command);
+            if (tokens[0] !== "cat") return false;
+            if (tokens.length !== 2) return false;
+            return ["README.md", "./README.md", "/README.md"].includes(tokens[1]);
+          },
         },
       ],
       quiz: {
@@ -1458,8 +1471,11 @@
           title: "Stage the file",
           text: `Stage it: <code>git add README.md</code>.`,
           hint: `Use <code>git add README.md</code>.`,
-          validate: ({ command, repo }) =>
-            command.trim() === "git add README.md" && Object.prototype.hasOwnProperty.call(repo.stagedFiles, "/README.md"),
+          validate: ({ command, repo }) => {
+            const tokens = splitArgs(command);
+            if (tokens[0] !== "git" || tokens[1] !== "add") return false;
+            return Object.prototype.hasOwnProperty.call(repo.stagedFiles, "/README.md");
+          },
         },
         {
           title: "Make your first commit",
@@ -1471,7 +1487,12 @@
           title: "View history",
           text: `Run <code>git log --oneline</code> to see your commit.`,
           hint: `Type <code>git log --oneline</code>.`,
-          validate: ({ command }) => command.trim() === "git log --oneline",
+          validate: ({ command }) => {
+            const tokens = splitArgs(command);
+            if (tokens[0] !== "git" || tokens[1] !== "log") return false;
+            if (tokens.length === 2) return true;
+            return tokens.length === 3 && tokens[2] === "--oneline";
+          },
         },
         {
           title: "Make a second commit",
@@ -1619,7 +1640,8 @@
           hint: `Use the editor modal, then save.`,
           validate: ({ repo }) => {
             const content = repo.workingFiles["/config.txt"] || "";
-            return !content.includes("<<<<<<<") && content.includes("color=purple");
+            if (content.includes("<<<<<<<") || content.includes("=======") || content.includes(">>>>>>>")) return false;
+            return /(^|\n)\s*color\s*=\s*purple\s*(\n|$)/.test(content);
           },
         },
         {
@@ -1678,9 +1700,15 @@
       steps: [
         {
           title: "Confirm your remote",
-          text: `Run <code>git remote -v</code>.`,
+          text: `Run <code>git remote -v</code> (or <code>git remote</code>).`,
           hint: `Type <code>git remote -v</code>.`,
-          validate: ({ command }) => command.trim() === "git remote -v",
+          validate: ({ command, repo }) => {
+            const tokens = splitArgs(command);
+            if (tokens[0] !== "git" || tokens[1] !== "remote") return false;
+            if (tokens.length === 2) return Object.keys(repo.remotes).length > 0;
+            if (tokens.length === 3 && tokens[2] === "-v") return Object.keys(repo.remotes).length > 0;
+            return false;
+          },
         },
         {
           title: "Make a commit locally",
@@ -1693,18 +1721,22 @@
           title: "Push to origin",
           text: `Push your commit: <code>git push -u origin main</code>.`,
           hint: `Type <code>git push -u origin main</code>.`,
-          validate: ({ command, repo }) =>
-            command.trim() === "git push -u origin main" && repo.lastEvent?.type === "git_push",
+          validate: ({ repo }) =>
+            repo.lastEvent?.type === "git_push" &&
+            repo.lastEvent?.remote === "origin" &&
+            repo.lastEvent?.branch === "main",
         },
         {
           title: "Pull a teammate’s change",
           text: `A teammate pushed a commit to <code>origin/main</code>. Run <code>git pull</code> to update.`,
           hint: `Type <code>git pull</code>.`,
-          validate: ({ command, repo }) =>
-            command.trim() === "git pull" &&
-            repo.lastEvent?.type?.startsWith("git_pull") &&
+          validate: ({ command, repo }) => {
+            const tokens = splitArgs(command);
+            if (tokens[0] !== "git" || tokens[1] !== "pull") return false;
+            if (!repo.lastEvent?.type?.startsWith("git_pull")) return false;
             // After clone (2) + your commit (3), pulling teammate makes it 4.
-            repo.commitOrder.length >= 4,
+            return repo.commitOrder.length >= 4;
+          },
         },
       ],
       quiz: {
@@ -1768,7 +1800,8 @@
           text: `Pull changes from origin: <code>git pull</code>.`,
           hint: `Type <code>git pull</code>.`,
           validate: ({ command, repo, app }) => {
-            if (command.trim() !== "git pull") return false;
+            const tokens = splitArgs(command);
+            if (tokens[0] !== "git" || tokens[1] !== "pull") return false;
             if (repo.lastEvent?.type !== "git_pull_ff" && repo.lastEvent?.type !== "git_pull_merge") return false;
             const start = app.checkpoints[app.stepIndex];
             if (!start) return true;
@@ -1853,14 +1886,14 @@
   }
 
   // -----------------------------
-  // App State (localStorage + export/import)
+  // App State (sessionStorage + export/import)
   // -----------------------------
 
   const STORAGE_KEY = "git_tutor_state_v1";
 
   function loadState() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = sessionStorage.getItem(STORAGE_KEY);
       if (!raw) return null;
       return JSON.parse(raw);
     } catch {
@@ -1870,7 +1903,7 @@
 
   function saveState(state) {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (err) {
       console.warn("Failed to save state:", err);
     }
@@ -2004,6 +2037,7 @@
       });
 
       qs("#btnResetLesson").addEventListener("click", () => this.resetLesson());
+      qs("#btnResetAll").addEventListener("click", () => this.resetAll());
       qs("#btnResetRepo").addEventListener("click", () => this.resetRepoToCheckpoint());
 
       qs("#btnExport").addEventListener("click", () => this.openStateModal("export"));
@@ -2116,6 +2150,38 @@
       lstate.repo = null;
       lstate.checkpoints = {};
       this.loadLesson(this.activeLesson.id);
+    }
+
+    resetAll() {
+      const confirmed = window.confirm("Reset all lessons, achievements, and simulated repos? This cannot be undone.");
+      if (!confirmed) return;
+
+      this.closeModal("stateModal");
+      this.closeModal("editorModal");
+      this.closeModal("quizModal");
+
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch (err) {
+        console.warn("Failed to clear storage:", err);
+      }
+
+      this.remoteStore = new RemoteStore();
+      this.seedRemotes();
+
+      this.state = defaultState();
+      this.repo = new SimulatedRepo();
+
+      this.history = [];
+      this.historyIndex = 0;
+
+      this.activeLesson = null;
+      this.checkpoints = {};
+      this.stepIndex = 0;
+
+      qs("#terminalOutput").innerHTML = "";
+      this.loadLesson(this.state.activeLessonId);
+      this.printLine("Reset all progress.", "muted");
     }
 
     resetRepoToCheckpoint() {

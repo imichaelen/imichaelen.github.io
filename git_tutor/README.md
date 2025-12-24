@@ -6,7 +6,7 @@
 - Simulated file system with staged/unstaged indicators
 - Live SVG Git graph (commits, branches, merges)
 - 6 guided lessons + quizzes + achievement badges
-- LocalStorage progress saving + export/import of your simulated state
+- Session-based progress saving (resets when the tab is closed) + export/import of your simulated state
 
 ## Project structure
 
@@ -38,5 +38,5 @@ Then open:
 
 - Use the lesson sidebar to switch lessons (each lesson keeps its own saved state).
 - Use **Reset lesson** to start over, or **Reset repo** to go back to the start of the current step.
+- Use **Reset all** to clear all lessons + achievements.
 - Use **Export** / **Import** to move progress between browsers or share a saved scenario.
-
