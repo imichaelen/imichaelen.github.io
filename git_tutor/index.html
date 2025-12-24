@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Git Tutor — Interactive Git Tutorial</title>
+    <meta
+      name="description"
+      content="Learn Git basics with an interactive terminal, a visual commit graph, and step-by-step lessons."
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <img class="brand__logo" src="assets/logo.svg" alt="" aria-hidden="true" />
+        <div class="brand__text">
+          <div class="brand__title">Git Tutor</div>
+          <div class="brand__subtitle">Practice commands. See the graph.</div>
+        </div>
+      </div>
+
+      <div class="topbar__actions">
+        <button class="btn btn--ghost" id="btnHelp" type="button" aria-expanded="false">
+          Help
+        </button>
+        <button class="btn btn--ghost" id="btnExport" type="button">Export</button>
+        <button class="btn btn--ghost" id="btnImport" type="button">Import</button>
+        <button class="btn btn--primary" id="btnResetLesson" type="button">Reset lesson</button>
+      </div>
+    </header>
+
+    <div class="app">
+      <aside class="sidebar" aria-label="Lessons">
+        <div class="sidebar__section">
+          <div class="sidebar__heading">Progress</div>
+          <div class="progress">
+            <div class="progress__bar" aria-hidden="true">
+              <div class="progress__barFill" id="progressBarFill"></div>
+            </div>
+            <div class="progress__meta">
+              <div id="progressText">0/6 lessons</div>
+              <div id="badgeCount">0 badges</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__heading">Lessons</div>
+          <nav class="lessonList" id="lessonList"></nav>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__heading">Achievements</div>
+          <div class="badges" id="badges"></div>
+        </div>
+      </aside>
+
+      <main class="main" id="main" tabindex="-1">
+        <section class="panel panel--instructions" aria-label="Lesson instructions">
+          <div class="instructions__top">
+            <div>
+              <div class="kicker" id="lessonKicker">Lesson</div>
+              <h1 class="h1" id="lessonTitle">Loading…</h1>
+            </div>
+
+            <div class="instructions__actions">
+              <button class="btn btn--ghost" id="btnQuiz" type="button" disabled>
+                Quiz
+              </button>
+              <button class="btn btn--ghost" id="btnResetRepo" type="button">Reset repo</button>
+            </div>
+          </div>
+
+          <div class="instructions__body">
+            <div class="instructions__intro" id="lessonIntro"></div>
+            <div class="instructions__step">
+              <div class="instructions__stepHeader">
+                <div class="kicker">Current step</div>
+                <div class="instructions__stepMeta" id="stepMeta">—</div>
+              </div>
+              <div class="instructions__stepText" id="stepText">—</div>
+              <div class="instructions__hint" id="stepHint" hidden></div>
+            </div>
+            <ol class="stepList" id="stepList"></ol>
+          </div>
+        </section>
+
+        <section class="workspace" aria-label="Practice area">
+          <section class="panel panel--terminal" aria-label="Terminal simulator">
+            <div class="panel__header">
+              <div class="panel__title">Terminal</div>
+              <div class="panel__meta">
+                <span class="pill" id="pillRepoState">No repo</span>
+                <span class="pill pill--muted" id="pillBranch">—</span>
+              </div>
+            </div>
+            <div class="terminal">
+              <div class="terminal__output" id="terminalOutput" role="log" aria-live="polite"></div>
+              <div class="terminal__suggestion" id="terminalSuggestion" aria-hidden="true"></div>
+              <div class="terminal__inputRow">
+                <span class="terminal__prompt" id="terminalPrompt" aria-hidden="true">$</span>
+                <input
+                  id="terminalInput"
+                  class="terminal__input"
+                  type="text"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  placeholder="Type a command (try: git init)"
+                  aria-label="Terminal input"
+                />
+              </div>
+              <div class="terminal__footer">
+                <span class="kbd">Enter</span> run
+                <span class="kbd">↑/↓</span> history
+                <span class="kbd">Tab</span> autocomplete
+                <span class="kbd">Ctrl+L</span> clear
+              </div>
+            </div>
+          </section>
+
+          <section class="panel panel--files" aria-label="File system">
+            <div class="panel__header">
+              <div class="panel__title">Files</div>
+              <div class="panel__meta">
+                <span class="pill pill--muted" id="pillCwd">/</span>
+              </div>
+            </div>
+            <div class="files">
+              <div class="files__legend">
+                <span class="tag tag--green">A</span> added
+                <span class="tag tag--yellow">M</span> modified
+                <span class="tag tag--red">D</span> deleted
+                <span class="tag tag--blue">S</span> staged
+                <span class="tag tag--violet">C</span> conflict
+              </div>
+              <div class="fileTree" id="fileTree"></div>
+            </div>
+          </section>
+
+          <section class="panel panel--graph" aria-label="Git graph">
+            <div class="panel__header">
+              <div class="panel__title">Git graph</div>
+              <div class="panel__meta" id="graphMeta">—</div>
+            </div>
+            <div class="graph">
+              <svg
+                id="gitGraph"
+                class="graph__svg"
+                viewBox="0 0 600 400"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                aria-label="Commit graph"
+              ></svg>
+              <div class="graph__legend" id="branchLegend"></div>
+            </div>
+          </section>
+
+          <section class="panel panel--help" id="helpPanel" aria-label="Help" hidden>
+            <div class="panel__header">
+              <div class="panel__title">Cheat sheet</div>
+              <div class="panel__meta">Supported commands</div>
+            </div>
+            <div class="help" id="helpContent"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <!-- Export / Import modal -->
+    <div class="modal" id="stateModal" role="dialog" aria-modal="true" aria-labelledby="stateModalTitle" hidden>
+      <div class="modal__card">
+        <div class="modal__header">
+          <div class="modal__title" id="stateModalTitle">Export / Import</div>
+          <button class="btn btn--ghost" id="btnCloseStateModal" type="button" aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <div class="modal__body">
+          <p class="muted">
+            Export saves your simulated repo + lesson progress. Import restores it. (This stays in your browser; no
+            network calls.)
+          </p>
+          <textarea id="stateTextarea" class="textarea" rows="10" spellcheck="false"></textarea>
+          <div class="modal__actions">
+            <button class="btn btn--ghost" id="btnCopyState" type="button">Copy</button>
+            <button class="btn btn--ghost" id="btnPasteState" type="button">Paste</button>
+            <div class="spacer"></div>
+            <button class="btn btn--primary" id="btnApplyImport" type="button">Import</button>
+          </div>
+          <div class="notice" id="stateModalNotice" hidden></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- File editor modal -->
+    <div class="modal" id="editorModal" role="dialog" aria-modal="true" aria-labelledby="editorTitle" hidden>
+      <div class="modal__card modal__card--wide">
+        <div class="modal__header">
+          <div class="modal__title" id="editorTitle">Edit file</div>
+          <button class="btn btn--ghost" id="btnCloseEditor" type="button" aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <div class="modal__body">
+          <div class="editorMeta">
+            <div class="pill pill--muted" id="editorPath">—</div>
+            <div class="editorMeta__right">
+              <button class="btn btn--ghost" id="btnRevertFile" type="button">Revert</button>
+              <button class="btn btn--primary" id="btnSaveFile" type="button">Save</button>
+            </div>
+          </div>
+          <textarea id="editorTextarea" class="textarea textarea--editor" rows="14" spellcheck="false"></textarea>
+          <div class="notice" id="editorNotice" hidden></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz modal -->
+    <div class="modal" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="quizTitle" hidden>
+      <div class="modal__card">
+        <div class="modal__header">
+          <div class="modal__title" id="quizTitle">Quiz</div>
+          <button class="btn btn--ghost" id="btnCloseQuiz" type="button" aria-label="Close">✕</button>
+        </div>
+        <div class="modal__body">
+          <div id="quizBody"></div>
+          <div class="modal__actions">
+            <button class="btn btn--primary" id="btnSubmitQuiz" type="button">Submit</button>
+          </div>
+          <div class="notice" id="quizNotice" hidden></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+

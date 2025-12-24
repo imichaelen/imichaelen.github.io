@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Michael Shen&#39;s Personal Blog</title>
+    <title>Git Tutor | Michael Shen&#39;s Personal Blog</title>
     <link
       rel="shortcut icon"
       href="https://imichaelen.github.io/favicon.ico?v=1588008319075"
@@ -18,7 +18,7 @@
     <link
       rel="alternate"
       type="application/atom+xml"
-      title="Michael Shen&#39;s Personal Blog - Atom Feed"
+      title="Git Tutor | Michael Shen&#39;s Personal Blog - Atom Feed"
       href="https://imichaelen.github.io/atom.xml"
     />
     <link
@@ -40,7 +40,16 @@
       gtag("config", "UA-163713322-1");
     </script>
 
-    <meta name="description" content="Michael Shen's Personal Blog" />
+    <meta
+      name="description"
+      content="A standalone interactive Git tutorial: practice commands in a terminal simulator and see the commit graph update live."
+    />
+    <meta name="keywords" content="git,tutorial,interactive" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"
+    />
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
     <div class="main">
@@ -80,78 +89,63 @@
           </div>
         </div>
 
-        <div class="post-container">
+        <div class="post-detail">
           <article class="post">
-            <a href="https://imichaelen.github.io/post/git-tutor/">
-              <h2 class="post-title">Git Tutor</h2>
-            </a>
+            <h2 class="post-title">Git Tutor</h2>
             <div class="post-info">
               <span> 2025-12-24 </span>
               <span> 1 min read </span>
             </div>
 
-            <div class="post-abstract">
-              <p>
-                Practice Git commands in a terminal simulator and watch the
-                commit graph update live.
-              </p>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="git-tutor-interactive-git-tutorial">
+                  Git Tutor: Interactive Git Tutorial
+                </h2>
+                <p>
+                  A standalone, offline-friendly tutorial website to help you
+                  practice Git basics with immediate feedback.
+                </p>
+
+                <p><strong>What you can do in Git Tutor:</strong></p>
+                <ul>
+                  <li>Run Git commands in a terminal-like simulator.</li>
+                  <li>
+                    Watch a live commit graph update as you create branches,
+                    commits, and merges.
+                  </li>
+                  <li>Follow guided lessons and unlock small achievements.</li>
+                </ul>
+
+                <p style="margin-top: 2em; text-align: center">
+                  <a
+                    href="/git_tutor/"
+                    style="
+                      display: inline-block;
+                      padding: 12px 24px;
+                      background-color: #4caf50;
+                      color: white;
+                      text-decoration: none;
+                      border-radius: 4px;
+                      font-weight: bold;
+                      font-size: 1.1em;
+                    "
+                  >
+                    Open Git Tutor
+                  </a>
+                </p>
+
+                <p style="margin-top: 2em; color: #666">
+                  <em>
+                    Tip: for best results when testing locally, run a simple
+                    server (e.g. <code>python3 -m http.server 8000</code>) and
+                    open <code>/git_tutor/</code> from there.
+                  </em>
+                </p>
+              </div>
             </div>
-          </article>
-
-          <article class="post">
-            <a href="https://imichaelen.github.io/post/demo/">
-              <h2 class="post-title">Demo</h2>
-            </a>
-            <div class="post-info">
-              <span> 2025-12-07 </span>
-              <span> 1 min read </span>
-            </div>
-
-            <div class="post-abstract">
-              <p>
-                🚀 Interactive demonstration of autonomous research workflow -
-                from 2D spintronics to computational discovery.
-              </p>
-            </div>
-          </article>
-
-          <article class="post">
-            <a href="https://imichaelen.github.io/post/hello-world/">
-              <h2 class="post-title">Hello World</h2>
-            </a>
-            <div class="post-info">
-              <span> 2020-04-16 </span>
-              <span> 1 min read </span>
-            </div>
-
-            <a
-              href="https://imichaelen.github.io/post/hello-world/"
-              class="post-feature-image"
-              style="
-                background-image: url('https://imichaelen.github.io/post-images/hello-world.png');
-              "
-            >
-            </a>
-
-            <div class="post-abstract"></div>
-          </article>
-
-          <article class="post">
-            <a
-              href="https://imichaelen.github.io/post/physics-note-oscillator-and-wave/"
-            >
-              <h2 class="post-title">(Physics Note) Oscillator and Wave</h2>
-            </a>
-            <div class="post-info">
-              <span> 2020-04-28 </span>
-              <span> 0 min read </span>
-            </div>
-
-            <div class="post-abstract"></div>
           </article>
         </div>
-
-        <div class="pagination-container"></div>
 
         <div class="site-footer">
           <a
@@ -164,5 +158,9 @@
         </div>
       </div>
     </div>
+
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
   </body>
 </html>
