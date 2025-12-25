@@ -8,6 +8,17 @@
       name="description"
       content="Learn Git basics with an interactive terminal, a visual commit graph, and step-by-step lessons."
     />
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem("git_tutor_theme");
+          if (saved === "dark" || saved === "light") {
+            document.documentElement.dataset.theme = saved;
+          }
+        } catch {}
+      })();
+    </script>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -29,6 +40,7 @@
         </button>
         <button class="btn btn--ghost" id="btnExport" type="button">Export</button>
         <button class="btn btn--ghost" id="btnImport" type="button">Import</button>
+        <button class="btn btn--ghost" id="btnTheme" type="button">Light mode</button>
         <button class="btn btn--primary" id="btnResetLesson" type="button">Reset lesson</button>
         <button class="btn btn--ghost" id="btnResetAll" type="button">Reset all</button>
       </div>

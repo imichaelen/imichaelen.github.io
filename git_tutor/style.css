@@ -13,6 +13,32 @@
   --muted: rgba(255, 255, 255, 0.65);
   --muted2: rgba(255, 255, 255, 0.5);
   --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+  --borderHover: rgba(255, 255, 255, 0.22);
+  --textStrong: rgba(255, 255, 255, 0.92);
+  --textSoft: rgba(255, 255, 255, 0.82);
+  --textDim: rgba(255, 255, 255, 0.55);
+  --textDimmer: rgba(255, 255, 255, 0.45);
+  --textPrompt: rgba(255, 255, 255, 0.72);
+
+  --overlay1: rgba(255, 255, 255, 0.06);
+  --overlay2: rgba(255, 255, 255, 0.04);
+  --overlay3: rgba(255, 255, 255, 0.03);
+  --overlay4: rgba(255, 255, 255, 0.02);
+  --badgeDot: rgba(255, 255, 255, 0.25);
+  --legendSwatch: rgba(255, 255, 255, 0.3);
+  --dashBorder: rgba(255, 255, 255, 0.1);
+  --topbarBg: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+  --inputRowBg: rgba(0, 0, 0, 0.12);
+  --graphBg: rgba(0, 0, 0, 0.18);
+  --textareaBg: rgba(0, 0, 0, 0.24);
+  --hintText: rgba(255, 255, 255, 0.86);
+
+  --graphEdge: rgba(255, 255, 255, 0.25);
+  --graphText: rgba(255, 255, 255, 0.82);
+  --graphNodeOutline: rgba(0,  0,  0,  0.45);
+  --graphLabelBg: rgba(0, 0, 0, 0.35);
+  --graphLabelBorder: rgba(255, 255, 255, 0.16);
+  --graphLabelText: rgba(255, 255, 255, 0.78);
 
   --green: #2ee59d;
   --yellow: #ffd166;
@@ -26,6 +52,84 @@
     "Apple Color Emoji", "Segoe UI Emoji";
 
   --radius: 14px;
+}
+
+:root[data-theme="light"] {
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --panel2: #f1f4f8;
+  --border: rgba(0, 0, 0, 0.08);
+  --border2: rgba(0, 0, 0, 0.14);
+  --text: rgba(0, 0, 0, 0.88);
+  --muted: rgba(0, 0, 0, 0.62);
+  --muted2: rgba(0, 0, 0, 0.48);
+  --shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+  --borderHover: rgba(0, 0, 0, 0.18);
+  --textStrong: rgba(0, 0, 0, 0.92);
+  --textSoft: rgba(0, 0, 0, 0.82);
+  --textDim: rgba(0, 0, 0, 0.55);
+  --textDimmer: rgba(0, 0, 0, 0.45);
+  --textPrompt: rgba(0, 0, 0, 0.72);
+
+  --overlay1: rgba(0, 0, 0, 0.06);
+  --overlay2: rgba(0, 0, 0, 0.04);
+  --overlay3: rgba(0, 0, 0, 0.03);
+  --overlay4: rgba(0, 0, 0, 0.02);
+  --badgeDot: rgba(0, 0, 0, 0.25);
+  --legendSwatch: rgba(0, 0, 0, 0.28);
+  --dashBorder: rgba(0, 0, 0, 0.1);
+  --topbarBg: linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent);
+  --inputRowBg: rgba(0, 0, 0, 0.03);
+  --graphBg: rgba(0, 0, 0, 0.035);
+  --textareaBg: rgba(0, 0, 0, 0.03);
+  --hintText: rgba(0, 0, 0, 0.82);
+
+  --graphEdge: rgba(0, 0, 0, 0.2);
+  --graphText: rgba(0, 0, 0, 0.74);
+  --graphNodeOutline: rgba(0, 0, 0, 0.24);
+  --graphLabelBg: rgba(255, 255, 255, 0.75);
+  --graphLabelBorder: rgba(0, 0, 0, 0.16);
+  --graphLabelText: rgba(0, 0, 0, 0.76);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: #f7f8fb;
+    --panel: #ffffff;
+    --panel2: #f1f4f8;
+    --border: rgba(0, 0, 0, 0.08);
+    --border2: rgba(0, 0, 0, 0.14);
+    --text: rgba(0, 0, 0, 0.88);
+    --muted: rgba(0, 0, 0, 0.62);
+    --muted2: rgba(0, 0, 0, 0.48);
+    --shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+    --borderHover: rgba(0, 0, 0, 0.18);
+    --textStrong: rgba(0, 0, 0, 0.92);
+    --textSoft: rgba(0, 0, 0, 0.82);
+    --textDim: rgba(0, 0, 0, 0.55);
+    --textDimmer: rgba(0, 0, 0, 0.45);
+    --textPrompt: rgba(0, 0, 0, 0.72);
+
+    --overlay1: rgba(0, 0, 0, 0.06);
+    --overlay2: rgba(0, 0, 0, 0.04);
+    --overlay3: rgba(0, 0, 0, 0.03);
+    --overlay4: rgba(0, 0, 0, 0.02);
+    --badgeDot: rgba(0, 0, 0, 0.25);
+    --legendSwatch: rgba(0, 0, 0, 0.28);
+    --dashBorder: rgba(0, 0, 0, 0.1);
+    --topbarBg: linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent);
+    --inputRowBg: rgba(0, 0, 0, 0.03);
+    --graphBg: rgba(0, 0, 0, 0.035);
+    --textareaBg: rgba(0, 0, 0, 0.03);
+    --hintText: rgba(0, 0, 0, 0.82);
+
+    --graphEdge: rgba(0, 0, 0, 0.2);
+    --graphText: rgba(0, 0, 0, 0.74);
+    --graphNodeOutline: rgba(0, 0, 0, 0.24);
+    --graphLabelBg: rgba(255, 255, 255, 0.75);
+    --graphLabelBorder: rgba(0, 0, 0, 0.16);
+    --graphLabelText: rgba(0, 0, 0, 0.76);
+  }
 }
 
 *,
@@ -74,7 +178,7 @@ body {
   gap: 12px;
   padding: 14px 18px;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+  background: var(--topbarBg);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -119,7 +223,7 @@ body {
 
 .btn {
   border: 1px solid var(--border2);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--overlay2);
   color: var(--text);
   padding: 9px 12px;
   border-radius: 12px;
@@ -130,8 +234,8 @@ body {
 }
 .btn:hover {
   transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--borderHover);
+  background: var(--overlay1);
 }
 .btn:active {
   transform: translateY(0px);
@@ -144,6 +248,7 @@ body {
 .btn--primary {
   border-color: rgba(76, 201, 240, 0.4);
   background: linear-gradient(180deg, rgba(76, 201, 240, 0.18), rgba(76, 201, 240, 0.08));
+  color: #fff;
 }
 .btn--ghost {
   background: transparent;
@@ -157,7 +262,7 @@ body {
 
 .sidebar {
   border-right: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--overlay4);
   padding: 14px;
   overflow: auto;
 }
@@ -175,7 +280,7 @@ body {
 .progress__bar {
   height: 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--overlay1);
   overflow: hidden;
   border: 1px solid var(--border);
 }
@@ -207,12 +312,12 @@ body {
   padding: 10px 12px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--overlay3);
   cursor: pointer;
 }
 .lessonBtn:hover {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--borderHover);
+  background: var(--overlay2);
 }
 .lessonBtn[aria-current="true"] {
   border-color: rgba(76, 201, 240, 0.55);
@@ -251,7 +356,7 @@ body {
   padding: 8px 10px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--overlay3);
   font-size: 12px;
   color: var(--muted);
 }
@@ -259,10 +364,10 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--badgeDot);
 }
 .badge--earned {
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--textStrong);
   border-color: rgba(46, 229, 157, 0.35);
   background: rgba(46, 229, 157, 0.08);
 }
@@ -281,7 +386,7 @@ body {
 
 .panel {
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
@@ -292,7 +397,7 @@ body {
   gap: 10px;
   padding: 12px 14px;
   border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--overlay4);
   border-top-left-radius: var(--radius);
   border-top-right-radius: var(--radius);
 }
@@ -343,7 +448,7 @@ body {
 }
 
 .instructions__intro {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--textSoft);
   font-size: 14px;
 }
 .instructions__intro p {
@@ -352,7 +457,7 @@ body {
 .instructions__intro code {
   font-family: var(--mono);
   font-size: 13px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--overlay1);
   border: 1px solid var(--border);
   padding: 2px 6px;
   border-radius: 8px;
@@ -360,7 +465,7 @@ body {
 
 .instructions__step {
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--overlay3);
   border-radius: 14px;
   padding: 12px;
 }
@@ -384,7 +489,7 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(255, 209, 102, 0.35);
   background: rgba(255, 209, 102, 0.08);
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--hintText);
   font-size: 13px;
 }
 
@@ -421,7 +526,7 @@ body {
   padding: 12px 14px;
   font-family: var(--mono);
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--text);
   overflow: auto;
   min-height: 260px;
   flex: 1 1 auto;
@@ -432,7 +537,7 @@ body {
   margin: 0 0 6px;
 }
 .terminal__line--cmd {
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--textStrong);
 }
 .terminal__line--ok {
   color: rgba(46, 229, 157, 0.88);
@@ -441,14 +546,14 @@ body {
   color: rgba(255, 84, 112, 0.9);
 }
 .terminal__line--muted {
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--textDim);
 }
 
 .terminal__suggestion {
   padding: 0 14px 8px;
   font-family: var(--mono);
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--textDimmer);
 }
 
 .terminal__inputRow {
@@ -457,33 +562,33 @@ body {
   gap: 10px;
   padding: 12px 14px;
   border-top: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.12);
+  background: var(--inputRowBg);
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
 }
 .terminal__prompt {
   font-family: var(--mono);
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--textPrompt);
 }
 .terminal__input {
   width: 100%;
   border: none;
   outline: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--textStrong);
   font-family: var(--mono);
   font-size: 13px;
 }
 .terminal__footer {
   padding: 0 14px 12px;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--textDim);
   font-size: 12px;
 }
 .kbd {
   font-family: var(--mono);
   font-size: 12px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--overlay2);
   padding: 2px 6px;
   border-radius: 8px;
 }
@@ -510,7 +615,7 @@ body {
   border-radius: 6px;
   padding: 1px 6px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--overlay2);
 }
 .tag--green {
   color: rgba(46, 229, 157, 0.95);
@@ -547,7 +652,7 @@ body {
   cursor: pointer;
 }
 .fileNode:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--overlay2);
 }
 .fileNode__name {
   white-space: nowrap;
@@ -560,7 +665,7 @@ body {
   border-radius: 999px;
   border: 1px solid var(--border);
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--overlay2);
 }
 .fileNode__badge--stage {
   border-color: rgba(76, 201, 240, 0.28);
@@ -580,7 +685,7 @@ body {
   border: 1px solid var(--border);
   font-weight: 800;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text);
 }
 .fileNode__status--A {
   border-color: rgba(46, 229, 157, 0.28);
@@ -611,7 +716,7 @@ body {
   display: block;
   border-radius: 12px;
   border: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.18);
+  background: var(--graphBg);
 }
 .graph__svg .pop {
   transform-box: fill-box;
@@ -649,7 +754,7 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--legendSwatch);
 }
 
 .panel--help {
@@ -657,13 +762,13 @@ body {
 }
 .help {
   padding: 10px 14px 14px;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--textSoft);
   font-size: 13px;
 }
 .help code {
   font-family: var(--mono);
   font-size: 12px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--overlay1);
   border: 1px solid var(--border);
   padding: 2px 6px;
   border-radius: 8px;
@@ -673,7 +778,7 @@ body {
   grid-template-columns: 220px 1fr;
   gap: 10px;
   padding: 8px 0;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed var(--dashBorder);
 }
 .help .cmdRow:last-child {
   border-bottom: none;
@@ -691,11 +796,11 @@ body {
   padding: 2px 8px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.86);
+  background: var(--overlay3);
+  color: var(--text);
 }
 .pill--muted {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--muted);
 }
 
 .muted {
@@ -719,7 +824,7 @@ body {
   width: min(720px, 100%);
   border-radius: 16px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(15, 22, 48, 0.98), rgba(12, 19, 41, 0.98));
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
   overflow: hidden;
 }
@@ -732,7 +837,7 @@ body {
   justify-content: space-between;
   padding: 12px 14px;
   border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--overlay3);
 }
 .modal__title {
   font-weight: 750;
@@ -750,8 +855,8 @@ body {
   width: 100%;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.24);
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--textareaBg);
+  color: var(--text);
   font-family: var(--mono);
   font-size: 12px;
   padding: 12px;
@@ -771,9 +876,9 @@ body {
   padding: 10px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--text);
   font-size: 13px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--overlay3);
 }
 .notice--ok {
   border-color: rgba(46, 229, 157, 0.3);
@@ -799,7 +904,7 @@ body {
 /* Quiz */
 .quizQ {
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--overlay4);
   border-radius: 14px;
   padding: 12px;
   margin-bottom: 12px;
@@ -816,17 +921,17 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  color: rgba(255, 255, 255, 0.84);
+  color: var(--text);
   font-size: 13px;
   padding: 8px 10px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--border);
+  background: var(--inputRowBg);
   cursor: pointer;
 }
 .quizOpt:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--borderHover);
+  background: var(--overlay2);
 }
 .quizOpt input {
   margin-top: 2px;

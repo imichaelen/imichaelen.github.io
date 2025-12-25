@@ -35,6 +35,50 @@
     return Date.now();
   }
 
+  // -----------------------------
+  // Theme (light / dark)
+  // -----------------------------
+
+  const THEME_STORAGE_KEY = "git_tutor_theme";
+
+  function systemPrefersLight() {
+    try {
+      return !!window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+    } catch {
+      return false;
+    }
+  }
+
+  function getActiveTheme() {
+    const explicit = document.documentElement?.dataset?.theme;
+    if (explicit === "light" || explicit === "dark") return explicit;
+    return systemPrefersLight() ? "light" : "dark";
+  }
+
+  function setStoredTheme(theme) {
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+      // Ignore storage failures (private mode / file:// restrictions).
+    }
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    setStoredTheme(theme);
+  }
+
+  function syncThemeToggleUi() {
+    const btn = qs("#btnTheme");
+    if (!btn) return;
+    const active = getActiveTheme();
+    const next = active === "dark" ? "light" : "dark";
+    btn.textContent = next === "light" ? "Light mode" : "Dark mode";
+    btn.setAttribute("aria-label", next === "light" ? "Switch to light mode" : "Switch to dark mode");
+    btn.setAttribute("aria-pressed", String(active === "light"));
+    btn.title = next === "light" ? "Switch to light mode" : "Switch to dark mode";
+  }
+
   function shortHash(hash) {
     if (!hash) return "—";
     return String(hash).slice(0, 7);
@@ -2102,6 +2146,12 @@
         this.renderAll();
       });
 
+      qs("#btnTheme").addEventListener("click", () => {
+        const active = getActiveTheme();
+        applyTheme(active === "dark" ? "light" : "dark");
+        syncThemeToggleUi();
+      });
+
       qs("#btnResetLesson").addEventListener("click", () => this.resetLesson());
       qs("#btnResetAll").addEventListener("click", () => this.resetAll());
       qs("#btnResetRepo").addEventListener("click", () => this.resetRepoToCheckpoint());
@@ -2140,6 +2190,8 @@
       input.addEventListener("keydown", (ev) => this.onTerminalKeyDown(ev));
       input.addEventListener("input", () => this.renderSuggestion());
       input.addEventListener("focus", () => this.renderSuggestion());
+
+      syncThemeToggleUi();
     }
 
     printWelcome() {
@@ -2984,7 +3036,7 @@
           const p = pos[parent];
           const midY = (y + p.y) / 2;
           edgePaths.push(
-            `<path d="M ${x} ${y} C ${x} ${midY}, ${p.x} ${midY}, ${p.x} ${p.y}" stroke="rgba(255,255,255,0.25)" stroke-width="3" fill="none" />`
+            `<path d="M ${x} ${y} C ${x} ${midY}, ${p.x} ${midY}, ${p.x} ${p.y}" stroke="var(--graphEdge)" stroke-width="3" fill="none" />`
           );
         }
 
@@ -2998,8 +3050,8 @@
           `<g class="node" data-hash="${escapeHtml(hash)}">
             <circle class="${popClass}" cx="${x}" cy="${y}" r="${radius}" fill="${escapeHtml(
               color
-            )}" stroke="rgba(0,0,0,0.45)" stroke-width="3" />
-            <text x="${x + 18}" y="${y + 5}" fill="rgba(255,255,255,0.82)" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">${escapeHtml(
+            )}" stroke="var(--graphNodeOutline)" stroke-width="3" />
+            <text x="${x + 18}" y="${y + 5}" fill="var(--graphText)" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">${escapeHtml(
               label
             )}</text>
           </g>`
@@ -3012,15 +3064,15 @@
         if (!head || !pos[head]) continue;
         if (branch.startsWith("__remote_")) continue;
         const { x, y } = pos[head];
-        const color = this.repo.branchMeta[branch]?.color || "rgba(255,255,255,0.5)";
+        const color = this.repo.branchMeta[branch]?.color || "var(--muted2)";
         branchLabels.push(
           `<g>
             <rect x="${x - 10}" y="${y - 26}" rx="10" ry="10" width="${Math.max(
               70,
               18 + branch.length * 7
-            )}" height="20" fill="rgba(0,0,0,0.35)" stroke="rgba(255,255,255,0.16)"></rect>
+            )}" height="20" fill="var(--graphLabelBg)" stroke="var(--graphLabelBorder)"></rect>
             <circle cx="${x}" cy="${y - 16}" r="4" fill="${escapeHtml(color)}"></circle>
-            <text x="${x + 10}" y="${y - 11}" fill="rgba(255,255,255,0.78)" font-size="11" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">${escapeHtml(
+            <text x="${x + 10}" y="${y - 11}" fill="var(--graphLabelText)" font-size="11" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">${escapeHtml(
               branch
             )}</text>
           </g>`
@@ -3057,7 +3109,7 @@
         item.className = "legendItem";
         const sw = document.createElement("span");
         sw.className = "legendSwatch";
-        sw.style.background = this.repo.branchMeta[b]?.color || "rgba(255,255,255,0.3)";
+        sw.style.background = this.repo.branchMeta[b]?.color || "var(--legendSwatch)";
         const label = document.createElement("span");
         label.textContent = `${b} @ ${shortHash(this.repo.branches[b])}`;
         item.appendChild(sw);
