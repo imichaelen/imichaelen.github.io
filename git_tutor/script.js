@@ -1378,6 +1378,9 @@
           `In this lesson you’ll initialize a repo and practice basic file commands. Watch how <code>git status</code> reacts as files appear in the working directory.`
         ) +
         lessonIntro(
+          `<strong>Why this matters:</strong> Git is easiest when you understand the three “areas” you’re moving changes through: the <em>working directory</em> (your files), the <em>staging area</em> (what will go into the next commit), and the <em>repository</em> (your commit history).`
+        ) +
+        lessonIntro(
           `Tip: The Files panel shows <code>A</code> for untracked/added files and highlights staged changes with <code>S</code>.`
         ),
       setup(repo, ctx) {
@@ -1390,31 +1393,36 @@
       steps: [
         {
           title: "Initialize a repository",
-          text: `Run <code>git init</code> to create an empty repository.`,
-          hint: `Type <code>git init</code> then press Enter.`,
+          text: `<p>Run <code>git init</code> to start tracking this folder with Git.</p>
+<p><strong>Why:</strong> <code>git init</code> creates the internal repository metadata (the “.git” database in real Git) so commits, branches, and history can exist.</p>`,
+          hint: `Type <code>git init</code>, then press Enter.`,
           validate: ({ command, repo }) => command.trim() === "git init" && repo.initialized,
         },
         {
           title: "Check status",
-          text: `Run <code>git status</code>. Notice you have an untracked file.`,
-          hint: `Type <code>git status</code>.`,
+          text: `<p>Run <code>git status</code>.</p>
+<p><strong>Why:</strong> Status is your “dashboard” — it tells you what’s untracked, what’s modified, and what’s staged for the next commit.</p>`,
+          hint: `Type <code>git status</code> and look for “Untracked files”.`,
           validate: ({ command, repo }) => command.trim() === "git status" && repo.getStatus().untracked.length > 0,
         },
         {
           title: "Create a README",
-          text: `Create <code>README.md</code> using: <code>echo "# Git Tutor" &gt; README.md</code>.`,
-          hint: `Use the sample command exactly, including the <code>&gt;</code>.`,
+          text: `<p>Create <code>README.md</code> using: <code>echo "# Git Tutor" &gt; README.md</code>.</p>
+<p><strong>Why:</strong> Creating a file gives us something concrete to track. In Git terms, it will start as an <em>untracked</em> file until you add it.</p>`,
+          hint: `Use the sample command (including <code>&gt;</code>). You can also use quotes like <code>'# Git Tutor'</code>.`,
           validate: ({ repo }) => Object.prototype.hasOwnProperty.call(repo.workingFiles, "/README.md"),
         },
         {
           title: "List files",
-          text: `Run <code>ls</code> and confirm <code>README.md</code> exists.`,
+          text: `<p>Run <code>ls</code> and confirm <code>README.md</code> exists.</p>
+<p><strong>Why:</strong> The simulator includes a tiny shell. Being comfortable with basic file commands helps you move faster with Git.</p>`,
           hint: `Type <code>ls</code>.`,
           validate: ({ command, repo }) => command.trim() === "ls" && Object.keys(repo.workingFiles).some((p) => p === "/README.md"),
         },
         {
           title: "View the file",
-          text: `Run <code>cat README.md</code> to print its contents.`,
+          text: `<p>Run <code>cat README.md</code> to print its contents.</p>
+<p><strong>Why:</strong> It’s good practice to verify what you wrote before you start committing changes.</p>`,
           hint: `Type <code>cat README.md</code>.`,
           validate: ({ command }) => {
             const tokens = splitArgs(command);
@@ -1454,6 +1462,9 @@
           `Now you’ll stage changes with <code>git add</code>, create commits with <code>git commit</code>, and inspect history with <code>git log</code>. As you commit, the Git graph will update.`
         ) +
         lessonIntro(
+          `<strong>Why this matters:</strong> A commit is a named snapshot of your project at a point in time. The staging area lets you decide <em>exactly</em> what goes into that snapshot.`
+        ) +
+        lessonIntro(
           `You can always reset to the start of the current step using <strong>Reset repo</strong>.`
         ),
       setup(repo) {
@@ -1463,14 +1474,15 @@
       steps: [
         {
           title: "Create a README",
-          text: `Create a file: <code>echo "# My Project" &gt; README.md</code>.`,
-          hint: `Use <code>echo</code> + redirection to write the file.`,
+          text: `<p>Create a file: <code>echo "# My Project" &gt; README.md</code>.</p>
+<p><strong>Why:</strong> We’ll commit this file so you can see how the Git graph grows with each snapshot.</p>`,
+          hint: `Use <code>echo</code> + redirection. (Single quotes also work: <code>echo '# My Project' &gt; README.md</code>.)`,
           validate: ({ repo }) => Object.prototype.hasOwnProperty.call(repo.workingFiles, "/README.md"),
         },
         {
           title: "Stage the file",
           text: `Stage it: <code>git add README.md</code>.`,
-          hint: `Use <code>git add README.md</code>.`,
+          hint: `Use <code>git add README.md</code>. This moves the file into the staging area (index).`,
           validate: ({ command, repo }) => {
             const tokens = splitArgs(command);
             if (tokens[0] !== "git" || tokens[1] !== "add") return false;
@@ -1479,14 +1491,16 @@
         },
         {
           title: "Make your first commit",
-          text: `Commit with a message: <code>git commit -m "Add README"</code>.`,
-          hint: `Be sure to include <code>-m</code> and quotes around the message.`,
+          text: `<p>Commit with a message: <code>git commit -m "Add README"</code>.</p>
+<p><strong>Why:</strong> Commit messages are future-you’s breadcrumbs. A good message makes history easier to understand and debug.</p>`,
+          hint: `Include <code>-m</code> and quotes. Double quotes or single quotes both work.`,
           validate: ({ command, repo }) => command.includes("git commit") && repo.commitOrder.length === 1,
         },
         {
           title: "View history",
-          text: `Run <code>git log --oneline</code> to see your commit.`,
-          hint: `Type <code>git log --oneline</code>.`,
+          text: `<p>Run <code>git log --oneline</code> (or <code>git log</code>) to see your commit.</p>
+<p><strong>Why:</strong> Git history is where you answer questions like “what changed?”, “when?”, and “why?”.</p>`,
+          hint: `Try <code>git log --oneline</code> for compact output.`,
           validate: ({ command }) => {
             const tokens = splitArgs(command);
             if (tokens[0] !== "git" || tokens[1] !== "log") return false;
@@ -1496,7 +1510,8 @@
         },
         {
           title: "Make a second commit",
-          text: `Update README (use <code>edit README.md</code> or an <code>echo</code>) and create a second commit.`,
+          text: `<p>Update README (use <code>edit README.md</code> or an <code>echo</code>) and create a second commit.</p>
+<p><strong>Why:</strong> Multiple commits tell a story. Small, focused commits are easier to review and revert.</p>`,
           hint: `Workflow: edit → <code>git add README.md</code> → <code>git commit -m "Update README"</code>.`,
           validate: ({ repo }) => repo.commitOrder.length >= 2,
         },
@@ -1531,6 +1546,9 @@
           `Branches let you work on features without disturbing <code>main</code>. You’ll create a branch, switch to it, commit, then switch back.`
         ) +
         lessonIntro(
+          `<strong>Why this matters:</strong> A branch is just a movable label pointing at a commit. Switching branches moves your “current view” of the project (your working directory) to match that label.`
+        ) +
+        lessonIntro(
           `Watch the Git graph: branches get different colors and lanes.`
         ),
       setup(repo) {
@@ -1543,38 +1561,44 @@
       steps: [
         {
           title: "List branches",
-          text: `Run <code>git branch</code> to list branches.`,
-          hint: `Type <code>git branch</code>.`,
+          text: `<p>Run <code>git branch</code> to list branches.</p>
+<p><strong>Why:</strong> This is how you confirm what branches exist and which one you’re currently on.</p>`,
+          hint: `Type <code>git branch</code>. The <code>*</code> marks your current branch.`,
           validate: ({ command }) => command.trim() === "git branch",
         },
         {
           title: "Create a feature branch",
-          text: `Create a branch: <code>git branch feature/login</code>.`,
-          hint: `Type <code>git branch feature/login</code>.`,
+          text: `<p>Create a branch: <code>git branch feature/login</code>.</p>
+<p><strong>Why:</strong> You can develop “login” work without changing <code>main</code> until you’re ready.</p>`,
+          hint: `Type <code>git branch feature/login</code>. This creates a new pointer at the current commit.`,
           validate: ({ repo }) => repo.branches["feature/login"] !== undefined,
         },
         {
           title: "Switch branches",
-          text: `Switch to it: <code>git checkout feature/login</code>.`,
+          text: `<p>Switch to it: <code>git checkout feature/login</code>.</p>
+<p><strong>Why:</strong> Your next commits will move the branch you’re currently on.</p>`,
           hint: `Type <code>git checkout feature/login</code>.`,
           validate: ({ repo }) => repo.currentBranch === "feature/login",
         },
         {
           title: "Add a file on the feature branch",
-          text: `Create <code>login.js</code>: <code>echo "console.log('login')" &gt; login.js</code>.`,
-          hint: `Use the sample command to create the file.`,
+          text: `<p>Create <code>login.js</code>: <code>echo "console.log('login')" &gt; login.js</code>.</p>
+<p><strong>Why:</strong> Changes on this branch won’t affect <code>main</code> until you merge.</p>`,
+          hint: `Use the sample command. (Single quotes are fine too.)`,
           validate: ({ repo }) => Object.prototype.hasOwnProperty.call(repo.workingFiles, "/login.js"),
         },
         {
           title: "Commit on the branch",
-          text: `Stage and commit <code>login.js</code>.`,
+          text: `<p>Stage and commit <code>login.js</code>.</p>
+<p><strong>Why:</strong> This commit advances <code>feature/login</code> but leaves <code>main</code> where it was.</p>`,
           hint: `Run <code>git add login.js</code> then <code>git commit -m "Add login"</code>.`,
           validate: ({ repo }) => repo.commitOrder.length >= 2 && repo.branches["feature/login"] === repo.head,
         },
         {
           title: "Switch back to main",
-          text: `Switch back: <code>git checkout main</code>.`,
-          hint: `Type <code>git checkout main</code>.`,
+          text: `<p>Switch back: <code>git checkout main</code>.</p>
+<p><strong>Why:</strong> Now you can compare <code>main</code> vs your feature branch in the graph.</p>`,
+          hint: `Type <code>git checkout main</code>. Notice how the graph highlights the current branch.`,
           validate: ({ repo }) => repo.currentBranch === "main",
         },
       ],
@@ -1608,6 +1632,9 @@
           `Merging combines work from two branches. If both branches change the same lines, Git reports a conflict and asks you to resolve it.`
         ) +
         lessonIntro(
+          `<strong>Why this matters:</strong> Conflicts aren’t errors — they’re Git asking you to make a decision. The sooner you learn to read conflict markers, the less scary merges become.`
+        ) +
+        lessonIntro(
           `In this lesson you’ll create a conflict on purpose, resolve it in the editor, then finish the merge.`
         ),
       setup(repo) {
@@ -1630,14 +1657,17 @@
       steps: [
         {
           title: "Merge the feature branch",
-          text: `Run <code>git merge feature/theme</code> to merge. You should get a conflict.`,
-          hint: `Type <code>git merge feature/theme</code>.`,
+          text: `<p>Run <code>git merge feature/theme</code> to merge. You should get a conflict.</p>
+<p><strong>Why:</strong> Both branches changed <code>config.txt</code> differently. Git can’t choose the right version automatically.</p>`,
+          hint: `Type <code>git merge feature/theme</code>, then (optionally) run <code>git status</code> to see “unmerged paths”.`,
           validate: ({ command, repo }) => command.trim() === "git merge feature/theme" && !!repo.mergeState,
         },
         {
           title: "Inspect the conflict",
-          text: `Open the file: <code>edit config.txt</code>. Remove the conflict markers and set <code>color=purple</code>.`,
-          hint: `Use the editor modal, then save.`,
+          text: `<p>Open the file: <code>edit config.txt</code>.</p>
+<p>Remove the conflict markers (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>) and choose a final value: set <code>color=purple</code>.</p>
+<p><strong>Why:</strong> A resolved file should contain only the final intended content — no markers.</p>`,
+          hint: `Use the editor modal and click Save. If you want, keep it simple: replace the whole file with <code>color=purple</code>.`,
           validate: ({ repo }) => {
             const content = repo.workingFiles["/config.txt"] || "";
             if (content.includes("<<<<<<<") || content.includes("=======") || content.includes(">>>>>>>")) return false;
@@ -1646,16 +1676,18 @@
         },
         {
           title: "Stage the resolution",
-          text: `Stage your fix: <code>git add config.txt</code>.`,
-          hint: `Type <code>git add config.txt</code>.`,
+          text: `<p>Stage your fix: <code>git add config.txt</code>.</p>
+<p><strong>Why:</strong> Staging tells Git “this file is resolved and ready to be committed”.</p>`,
+          hint: `Type <code>git add config.txt</code>. The conflict badge should disappear from the Files panel.`,
           validate: ({ repo }) =>
             Object.prototype.hasOwnProperty.call(repo.stagedFiles, "/config.txt") &&
             (repo.mergeState?.conflicts?.length || 0) === 0,
         },
         {
           title: "Finish the merge",
-          text: `Commit to conclude the merge: <code>git commit -m "Merge theme"</code>.`,
-          hint: `Type the commit command with a message.`,
+          text: `<p>Commit to conclude the merge: <code>git commit -m "Merge theme"</code>.</p>
+<p><strong>Why:</strong> Merge commits tie two histories together. In the graph, you’ll see a commit with two parents.</p>`,
+          hint: `Type the commit command with a message. (In real Git you can also run <code>git commit</code> without <code>-m</code> during merges.)`,
           validate: ({ repo }) => !repo.mergeState && repo.commitOrder.length >= 4,
         },
       ],
@@ -1686,22 +1718,45 @@
       short: "clone, push, pull",
       introHtml:
         lessonIntro(
-          `Remotes let you share work. In this tutorial, remotes are simulated (no network). You’ll clone a repo, commit, push, then pull a teammate’s change.`
+          `Remotes let you share work. In this tutorial, remotes are simulated (no network). You’ll clone a repo, inspect what you got, commit, push, then pull a teammate’s change.`
+        ) +
+        lessonIntro(
+          `<strong>Why this matters:</strong> “Remote” is just another copy of the repository (often on GitHub). The basic loop is: clone → commit locally → push → pull others’ work.`
         ) +
         lessonIntro(
           `Tip: Use <code>git remote -v</code> to confirm where you’re pushing/pulling.`
         ),
       setup(repo, ctx) {
         repo.reset();
-        // Seed remote used in this lesson.
-        const url = ctx.seedRemoteUrl;
-        repo.gitClone([url], ctx);
       },
       steps: [
         {
+          title: "Clone a repository",
+          text: `<p>Clone the practice repo: <code>git clone https://example.com/acme/widgets.git</code>.</p>
+<p><strong>Why:</strong> <code>git clone</code> downloads commits and sets up a default remote called <code>origin</code> so you can push/pull later.</p>`,
+          hint: `Type <code>git clone https://example.com/acme/widgets.git</code>. (It’s simulated — no network calls.)`,
+          validate: ({ command, repo, app }) => {
+            const tokens = splitArgs(command);
+            if (tokens[0] !== "git" || tokens[1] !== "clone") return false;
+            const url = tokens[2] || "";
+            return repo.lastEvent?.type === "git_clone" && url === app.ctx().seedRemoteUrl;
+          },
+        },
+        {
+          title: "Inspect what you cloned",
+          text: `<p>Run <code>git log --oneline</code> to see the history you downloaded.</p>
+<p><strong>Why:</strong> After cloning, your local repo already has commits. Looking at the history helps you understand the project state you started from.</p>`,
+          hint: `Type <code>git log --oneline</code>.`,
+          validate: ({ command }) => {
+            const tokens = splitArgs(command);
+            return tokens[0] === "git" && tokens[1] === "log" && tokens.includes("--oneline");
+          },
+        },
+        {
           title: "Confirm your remote",
-          text: `Run <code>git remote -v</code> (or <code>git remote</code>).`,
-          hint: `Type <code>git remote -v</code>.`,
+          text: `<p>Run <code>git remote -v</code> (or <code>git remote</code>).</p>
+<p><strong>Why:</strong> This is how you verify your local repo knows where <code>origin</code> points.</p>`,
+          hint: `Type <code>git remote -v</code>. You should see <code>origin</code>.`,
           validate: ({ command, repo }) => {
             const tokens = splitArgs(command);
             if (tokens[0] !== "git" || tokens[1] !== "remote") return false;
@@ -1712,14 +1767,16 @@
         },
         {
           title: "Make a commit locally",
-          text: `Edit <code>README.md</code> (or use <code>echo</code>), then commit the change.`,
+          text: `<p>Edit <code>README.md</code> (or use <code>echo</code>), then commit the change.</p>
+<p><strong>Why:</strong> Your local commits are private until you push them. This is where you do your work safely.</p>`,
           hint: `Try: <code>edit README.md</code> → <code>git add README.md</code> → <code>git commit -m "Update README"</code>.`,
           // The seed remote has 2 commits; require at least one new local commit.
           validate: ({ repo }) => repo.commitOrder.length >= 3,
         },
         {
           title: "Push to origin",
-          text: `Push your commit: <code>git push -u origin main</code>.`,
+          text: `<p>Push your commit: <code>git push -u origin main</code>.</p>
+<p><strong>Why:</strong> Pushing uploads your commits so others can pull them. The <code>-u</code> flag sets “upstream tracking” so future pushes/pulls can be shorter.</p>`,
           hint: `Type <code>git push -u origin main</code>.`,
           validate: ({ repo }) =>
             repo.lastEvent?.type === "git_push" &&
@@ -1728,8 +1785,9 @@
         },
         {
           title: "Pull a teammate’s change",
-          text: `A teammate pushed a commit to <code>origin/main</code>. Run <code>git pull</code> to update.`,
-          hint: `Type <code>git pull</code>.`,
+          text: `<p>A teammate pushed a commit to <code>origin/main</code>. Run <code>git pull</code> to update.</p>
+<p><strong>Why:</strong> Pull brings your local branch up to date with the remote. Conceptually it’s “download + integrate”. (In real Git, it’s roughly fetch + merge/fast-forward.)</p>`,
+          hint: `Type <code>git pull</code>. Watch the graph add the teammate commit.`,
           validate: ({ command, repo }) => {
             const tokens = splitArgs(command);
             if (tokens[0] !== "git" || tokens[1] !== "pull") return false;
@@ -1761,7 +1819,7 @@
       },
       // This hook is used to simulate a teammate commit once the learner successfully pushes.
       onStepComplete({ stepIndex, repo, ctx }) {
-        if (stepIndex !== 2) return;
+        if (stepIndex !== 4) return;
         ctx.simulateTeammateCommitToOriginMain(repo);
       },
     },
@@ -1772,6 +1830,9 @@
       introHtml:
         lessonIntro(
           `Real-world Git is mostly about safe collaboration. You’ll practice <code>stash</code> (park work), <code>reset --hard</code> (discard local mistakes), and <code>revert</code> (undo a commit safely in shared history).`
+        ) +
+        lessonIntro(
+          `<strong>Why this matters:</strong> Knowing the “safety tools” lets you experiment confidently. The key idea: <code>reset</code> rewrites your local history, while <code>revert</code> preserves history by adding a new “undo” commit.`
         ) +
         lessonIntro(
           `This lesson uses a simulated remote with commits that represent a teammate’s work.`
@@ -1785,20 +1846,22 @@
       steps: [
         {
           title: "Create uncommitted work",
-          text: `Create a work-in-progress file: <code>echo "WIP" &gt; NOTES.md</code>.`,
+          text: `<p>Create a work-in-progress file: <code>echo "WIP" &gt; NOTES.md</code>.</p>
+<p><strong>Why:</strong> We need some local changes to demonstrate stashing.</p>`,
           hint: `Use the echo + redirect command.`,
           validate: ({ repo }) => Object.prototype.hasOwnProperty.call(repo.workingFiles, "/NOTES.md"),
         },
         {
           title: "Stash it",
-          text: `Run <code>git stash</code>. Your working directory should become clean.`,
-          hint: `Type <code>git stash</code>.`,
+          text: `<p>Run <code>git stash</code>. Your working directory should become clean.</p>
+<p><strong>Why:</strong> Stash temporarily shelves local work so you can switch context (like pulling updates) without committing half-finished changes.</p>`,
+          hint: `Type <code>git stash</code>. Then try <code>git status</code> to see a clean tree.`,
           validate: ({ command, repo }) => command.trim() === "git stash" && repo.stash.length === 1 && !repo.getStatus().isDirty,
         },
         {
           title: "Pull remote updates",
           text: `Pull changes from origin: <code>git pull</code>.`,
-          hint: `Type <code>git pull</code>.`,
+          hint: `Type <code>git pull</code>. You stashed first so the pull can apply cleanly.`,
           validate: ({ command, repo, app }) => {
             const tokens = splitArgs(command);
             if (tokens[0] !== "git" || tokens[1] !== "pull") return false;
@@ -1811,15 +1874,17 @@
         },
         {
           title: "Bring your work back",
-          text: `Restore your stashed changes: <code>git stash pop</code>.`,
+          text: `<p>Restore your stashed changes: <code>git stash pop</code>.</p>
+<p><strong>Why:</strong> Once your branch is updated, you can re-apply your paused work on top.</p>`,
           hint: `Type <code>git stash pop</code>.`,
           validate: ({ command, repo }) =>
             command.trim() === "git stash pop" && Object.prototype.hasOwnProperty.call(repo.workingFiles, "/NOTES.md"),
         },
         {
           title: "Commit, then undo it locally",
-          text: `Commit <code>NOTES.md</code>, then undo it using <code>git reset --hard HEAD~1</code>.`,
-          hint: `Commit flow: <code>git add NOTES.md</code> → <code>git commit -m "Add notes"</code> → reset hard.`,
+          text: `<p>Commit <code>NOTES.md</code>, then undo it using <code>git reset --hard HEAD~1</code>.</p>
+<p><strong>Why:</strong> <code>reset --hard</code> is a “local rewind” tool. Use it for mistakes that haven’t been shared.</p>`,
+          hint: `Commit flow: <code>git add NOTES.md</code> → <code>git commit -m "Add notes"</code> → <code>git reset --hard HEAD~1</code>.`,
           validate: ({ repo, app }) => {
             if (repo.lastEvent?.type !== "git_reset_hard") return false;
             if (Object.prototype.hasOwnProperty.call(repo.workingFiles, "/NOTES.md")) return false;
@@ -1832,8 +1897,9 @@
         },
         {
           title: "Revert a bad commit (safe for sharing)",
-          text: `Run <code>git log --oneline</code>, then revert the newest commit using <code>git revert &lt;hash&gt;</code>.`,
-          hint: `Copy the short hash from log, then run <code>git revert</code>.`,
+          text: `<p>Run <code>git log --oneline</code>, then revert the newest commit using <code>git revert &lt;hash&gt;</code>.</p>
+<p><strong>Why:</strong> <code>revert</code> is the “safe undo” for shared history: it keeps the original commit and adds a new commit that undoes it.</p>`,
+          hint: `Copy the short hash from <code>git log --oneline</code>, then run <code>git revert &lt;hash&gt;</code>.`,
           validate: ({ repo }) => repo.commitOrder.length >= 3 && repo.lastEvent?.type === "git_revert",
         },
       ],
