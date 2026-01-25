@@ -1431,8 +1431,8 @@
         repo.reset();
         repo.cwd = "/";
         // Give learners something to see even before init.
-        repo.directories["/docs"] = true;
-        repo.workingFiles["/docs/tips.txt"] = "Try: git init\nTry: git status\n";
+        repo.directories["/demo"] = true;
+        repo.workingFiles["/demo/tips.txt"] = "Try: git init\nTry: git status\n";
       },
       steps: [
         {

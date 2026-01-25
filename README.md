@@ -21,7 +21,7 @@ A personal blog with posts, archives, tags, and an about page. The site is fully
 - `index.html` - Homepage
 - `atom.xml` - RSS feed
 
-### 2. Demo Site (`/docs/`)
+### 2. Demo Site (`/projects/demo/`)
 
 An autonomous research workflow demonstration showcasing AI-driven first-principles research. This is a self-contained static site with interactive visualizations.
 
@@ -69,11 +69,11 @@ Navigate to `/post/<post-name>/index.html` and edit the HTML directly.
 
 ### Updating the Demo Site
 
-The demo site (`/docs/`) has its own documentation in `/docs/README.md`. Key points:
+The demo site (`/projects/demo/`) has its own documentation in `/projects/demo/README.md`. Key points:
 
 1. **Update demo data**: Run `python scripts/generate_demo_data.py` (if the script exists) to regenerate sanitized data
-2. **Edit demo content**: Modify files in `/docs/` directly
-3. **Test locally**: Open `/docs/index.html` in a browser or run a local server
+2. **Edit demo content**: Modify files in `/projects/demo/` directly
+3. **Test locally**: Open `/projects/demo/index.html` in a browser or run a local server
 
 ---
 
@@ -108,7 +108,7 @@ npx http-server -p 8000
 Then visit:
 
 - Main site: `http://localhost:8000/`
-- Demo site: `http://localhost:8000/docs/`
+- Demo site: `http://localhost:8000/projects/demo/`
 
 ---
 
@@ -220,7 +220,7 @@ If you want to reduce repetition while keeping things simple, consider:
 | Task             | Action                                                      |
 | ---------------- | ----------------------------------------------------------- |
 | Add blog post    | Create `/post/<slug>/index.html` + update homepage/archives |
-| Update demo      | Edit files in `/docs/`                                      |
+| Update demo      | Edit files in `/projects/demo/`                             |
 | Preview site     | Run `python3 -m http.server 8000`                           |
 | Deploy           | `git add . && git commit -m "msg" && git push`              |
 | Check deployment | Visit `https://imichaelen.github.io` after 1-2 min          |

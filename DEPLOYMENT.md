@@ -2,21 +2,15 @@
 
 ## Testing Locally (Before Deploying)
 
-1. **Start the local preview server:**
+1. **Start a local server:**
 
    ```bash
-   ./preview.sh
-   ```
-
-   Or specify a custom port:
-
-   ```bash
-   ./preview.sh 3000
+   python3 -m http.server 8000
    ```
 
 2. **Test in your browser:**
    - Main site: http://localhost:8000/
-   - Demo site: http://localhost:8000/docs/
+   - Demo site: http://localhost:8000/projects/demo/
 3. **Verify:**
    - [ ] Navigation menu shows all links including "Demo"
    - [ ] Click "Demo" link → should load the AI Scientist visualization
@@ -62,7 +56,7 @@ After pushing:
    - Verify navigation includes "Demo" link
    - Check footer (should NOT say "Powered by Gridea")
 
-2. **Check demo site**: https://imichaelen.github.io/docs/
+2. **Check demo site**: https://imichaelen.github.io/projects/demo/
 
    - Should show "Autonomous Research Workflow" visualization
    - Interactive tree should load and be scrollable
@@ -76,8 +70,8 @@ After pushing:
 
 ### Demo site shows 404
 
-- Check that `/docs/` folder exists in your repository
-- Verify `docs/index.html` exists
+- Check that `/projects/demo/` folder exists in your repository
+- Verify `projects/demo/index.html` exists
 - Clear browser cache and try again
 
 ### Changes not appearing
@@ -96,20 +90,20 @@ After pushing:
 ### Update main blog content
 
 1. Edit HTML files in `/post/`, `/archives/`, etc.
-2. Test locally with `./preview.sh`
+2. Test locally with `python3 -m http.server 8000`
 3. Deploy: `git add . && git commit -m "msg" && git push`
 
 ### Update demo site
 
-1. Edit files in `/docs/`
-2. Test locally: `./preview.sh` → http://localhost:8000/docs/
+1. Edit files in `/projects/demo/`
+2. Test locally: `python3 -m http.server 8000` → http://localhost:8000/projects/demo/
 3. Deploy: `git add . && git commit -m "msg" && git push`
 
 ## Quick Commands Cheat Sheet
 
 ```bash
 # Preview locally
-./preview.sh
+python3 -m http.server 8000
 
 # Deploy changes
 git add .
