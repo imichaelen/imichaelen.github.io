@@ -18,3 +18,16 @@
 
 # Local server
 *.log
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Daily newspaper intermediates (keep state committed)
+data/*
+!data/state.json

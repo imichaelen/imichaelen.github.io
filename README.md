@@ -197,7 +197,6 @@ rm -rf tag/6hK4xBI9R/
 If you want to reduce repetition while keeping things simple, consider:
 
 1. **Jekyll** (GitHub Pages built-in)
-
    - Write posts in Markdown
    - Templates for headers/footers
    - Automatic archive/tag generation
@@ -212,6 +211,49 @@ If you want to reduce repetition while keeping things simple, consider:
 3. **Custom scripts**
    - Write a simple script to generate HTML from Markdown
    - Keep full control, minimal dependencies
+
+---
+
+## Daily Newspaper (Automated)
+
+This repo includes a small, deterministic pipeline that generates a daily arXiv digest and commits it back to `master` so GitHub Pages updates automatically.
+
+**Where it outputs**
+
+- `daily/index.md` (Latest + Archive)
+- `daily/issues/YYYY-MM-DD.md` (JST date)
+- `data/state.json` (committed; tracks seen IDs + last run)
+
+Intermediate files like `data/collected.json` and `data/summaries.json` are intentionally gitignored.
+
+### Configure what you track
+
+Edit `config.yaml`:
+- `arxiv.queries`: add/remove categories/keywords (Lucene query syntax used by arXiv API)
+- `issue.lookback_days`: include only papers published within the last N days (set `0` to disable)
+- `llm.trend_enabled`: generate a “Trend” section (requires API key)
+
+### How to run locally
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+
+python scripts/collect.py --config config.yaml
+python scripts/summarize.py --config config.yaml   # optional; requires OPENAI_API_KEY or DEEPSEEK_API_KEY
+python scripts/render.py --config config.yaml
+```
+
+Notes:
+- Export `OPENAI_API_KEY` and/or `DEEPSEEK_API_KEY` in your shell environment (you can source your local secrets file yourself; do not commit secrets).
+- Local `python -m http.server` will show the `.md` files as text; GitHub Pages renders them as HTML.
+
+### GitHub Actions
+
+Workflow: `.github/workflows/daily.yml` runs daily at **07:00 JST** (`22:00 UTC`) and uses repo secrets:
+- `DEEPSEEK_API_KEY` (preferred)
+- `OPENAI_API_KEY`
 
 ---
 

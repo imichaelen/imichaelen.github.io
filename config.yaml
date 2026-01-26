@@ -1,0 +1,44 @@
+arxiv:
+  user_agent: "imichaelen-daily-bot/1.0 (https://github.com/imichaelen/imichaelen.github.io)"
+  queries:
+    - name: "Materials Informatics (ML for materials)"
+      search_query: >
+        (cat:cond-mat.mtrl-sci OR cat:physics.chem-ph OR cat:physics.comp-ph)
+        AND
+        (abs:"machine learning" OR abs:"deep learning" OR abs:neural OR abs:graph OR abs:transformer
+         OR ti:"machine learning" OR ti:"deep learning" OR ti:neural OR ti:graph OR ti:transformer)
+      max_results: 100
+      sort_by: "submittedDate"
+      sort_order: "descending"
+    - name: "AI/ML (cs.AI/cs.LG/stat.ML)"
+      search_query: "cat:cs.AI OR cat:cs.LG OR cat:stat.ML"
+      max_results: 50
+      sort_by: "submittedDate"
+      sort_order: "descending"
+
+issue:
+  # Only include papers published within the last N days (rolling window).
+  # Set to 0 to disable filtering.
+  lookback_days: 1
+  # If true, unseen items outside lookback are marked as seen (skipped).
+  mark_skipped_as_seen: true
+
+data:
+  state_path: "data/state.json"
+  collected_path: "data/collected.json"
+  summaries_path: "data/summaries.json"
+
+output:
+  issues_dir: "daily/issues"
+  index_path: "daily/index.md"
+
+llm:
+  enabled: true
+  provider_preference: ["deepseek", "openai"]
+  model:
+    deepseek: "deepseek-chat"
+    openai: "gpt-4o-mini"
+  max_items: 10
+  trend_enabled: true
+  trend_max_items: 25
+  temperature: 0
