@@ -53,8 +53,12 @@ jobs:
 
           # Sync with remote to avoid non-fast-forward push failures if the branch
           # advanced after checkout (e.g., another workflow run or a manual push).
+          # We must stash first because the working tree is already modified by the
+          # generation steps, and rebase refuses to run with local changes.
+          git stash push -u -m "daily-newspaper-pre-rebase" || true
           git fetch origin "${BRANCH}"
           git rebase "origin/${BRANCH}"
+          git stash pop || true
 
           git add -A
           ISSUE_DATE="$(TZ=Asia/Tokyo date +%F)"
