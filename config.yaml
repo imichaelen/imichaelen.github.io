@@ -7,12 +7,12 @@ arxiv:
         AND
         (abs:"machine learning" OR abs:"deep learning" OR abs:neural OR abs:graph OR abs:transformer
          OR ti:"machine learning" OR ti:"deep learning" OR ti:neural OR ti:graph OR ti:transformer)
-      max_results: 100
+      max_results: 200
       sort_by: "submittedDate"
       sort_order: "descending"
     - name: "AI/ML (cs.AI/cs.LG/stat.ML)"
       search_query: "cat:cs.AI OR cat:cs.LG OR cat:stat.ML"
-      max_results: 50
+      max_results: 200
       sort_by: "submittedDate"
       sort_order: "descending"
 
@@ -23,10 +23,10 @@ issue:
   # If true, unseen items outside lookback are marked as seen (skipped).
   mark_skipped_as_seen: true
   # How many papers to fully render (title/authors/summary).
-  featured_papers: 12
+  featured_papers: 24
   # Optionally include the remaining papers as a collapsed title-only list.
   include_more_section: true
-  more_titles_max: 80
+  more_titles_max: 200
 
 data:
   state_path: "data/state.json"
@@ -43,9 +43,9 @@ llm:
   model:
     deepseek: "deepseek-chat"
     openai: "gpt-4o-mini"
-  max_items: 12
+  max_items: 50
   trend_enabled: true
-  trend_max_items: 25
+  trend_max_items: 200
   digest_enabled: true
-  digest_max_items: 40
+  digest_max_items: 200
   temperature: 0
