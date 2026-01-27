@@ -143,10 +143,13 @@ def summarize_trend(
         "Return ONLY a JSON object with this schema:\n"
         '{ "trend_summary": string, "themes": string[], "keywords": string[] }\n'
         "Constraints:\n"
-        "- trend_summary: 2-4 sentences, plain text.\n"
-        "- themes: 3-6 short phrases.\n"
+        "- trend_summary: 2-4 sentences, plain text. If the set spans multiple research areas, mention that explicitly.\n"
+        "- themes: 3-6 short phrases. Prefer prefixing each theme with a short tag like 'Materials:' or 'AI:' when helpful.\n"
         "- keywords: 6-12 keywords/phrases.\n"
         "- No markdown, no extra keys.\n\n"
+        "Guidance:\n"
+        "- The paper set may mix domains (e.g., materials/physics simulation and AI/LLM work). Reflect that without forcing a fixed balance.\n"
+        "- Base tags on the paper titles/abstracts (and any category hints visible).\n\n"
         "Papers:\n"
         + "\n".join(parts)
         + "\n"
@@ -233,6 +236,8 @@ def summarize_digest(
 
     prompt = (
         "You are writing a concise daily research newspaper for a technical reader.\n"
+        "The paper set may mix domains (e.g., materials/physics simulation and AI/LLM work).\n"
+        "Use the provided Query and Category hints when helpful, but do not assume any fixed set of queries.\n"
         "Return ONLY a JSON object with this schema:\n"
         "{\n"
         '  \"headline\": string,\n'
@@ -246,10 +251,12 @@ def summarize_digest(
         "- headline: <= 90 chars, plain text.\n"
         "- lede: 2-4 sentences, plain text.\n"
         "- highlights: 4-7 short bullet-like strings.\n"
-        "- themes: 3-6 short phrases.\n"
+        "- themes: 3-6 short phrases. Prefer prefixing each theme with a short tag like 'Materials:' or 'AI:' when helpful.\n"
         "- keywords: 6-12 keywords/phrases.\n"
         f"- featured_ids: pick up to {featured_count} IDs from the list (use IDs exactly; no invented IDs).\n"
         "- No markdown, no extra keys.\n\n"
+        "Selection guidance:\n"
+        "- If multiple domains or queries are present, try to make featured_ids diverse across them when possible (no strict quota).\n"
         "Papers:\n"
         + "\n".join(parts)
         + "\n"
