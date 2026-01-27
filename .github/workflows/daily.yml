@@ -43,13 +43,31 @@ jobs:
 
       - name: Commit and push (if changed)
         run: |
+          BRANCH="${GITHUB_REF_NAME}"
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Sync with remote to avoid non-fast-forward push failures if the branch
+          # advanced after checkout (e.g., another workflow run or a manual push).
+          git fetch origin "${BRANCH}"
+          git rebase "origin/${BRANCH}"
+
           git add -A
           ISSUE_DATE="$(TZ=Asia/Tokyo date +%F)"
           git commit -m "Daily issue: ${ISSUE_DATE}"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+          # Push with a small retry loop in case the branch advanced during the run.
+          for i in 1 2 3; do
+            if git push origin "HEAD:${BRANCH}"; then
+              exit 0
+            fi
+            echo "Push failed (attempt ${i}); rebasing on latest and retrying..."
+            git fetch origin "${BRANCH}"
+            git rebase "origin/${BRANCH}"
+          done
+          echo "Push failed after retries."
+          exit 1
