@@ -231,7 +231,9 @@ Intermediate files like `data/collected.json` and `data/summaries.json` are inte
 Edit `config.yaml`:
 - `arxiv.queries`: add/remove categories/keywords (Lucene query syntax used by arXiv API)
 - `issue.lookback_days`: include only papers published within the last N days (set `0` to disable)
+- `issue.featured_papers`: how many papers get full summaries on the page
 - `llm.trend_enabled`: generate a “Trend” section (requires API key)
+- `llm.digest_enabled`: generate a “What’s New Today” newspaper-style digest (requires API key)
 
 ### How to run locally
 

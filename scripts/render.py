@@ -181,8 +181,12 @@ def _render_issue_markdown(
     items: list[dict[str, Any]],
     summaries: dict[str, Any],
     issue_trend: dict[str, Any] | None,
+    issue_digest: dict[str, Any] | None,
     lookback_days: int,
     skipped_count: int,
+    featured_papers: int,
+    include_more_section: bool,
+    more_titles_max: int,
 ) -> str:
     lines: list[str] = []
     lines.extend(
@@ -193,7 +197,7 @@ def _render_issue_markdown(
             "",
             f"# Daily Issue (JST): {date_jst}",
             "",
-            "## Trend",
+            "## What's New Today",
             "",
         ]
     )
@@ -206,8 +210,60 @@ def _render_issue_markdown(
         else:
             lines.append("_No new papers in this issue._")
         lines.append("")
+        if queries:
+            lines.append("<details><summary>Search definitions</summary>")
+            lines.append("")
+            for q in queries:
+                name = (q.get("name") or "").strip()
+                sq = (q.get("search_query") or "").strip()
+                if name and sq:
+                    lines.append(f"- {name} — `{sq}`")
+                elif sq:
+                    lines.append(f"- `{sq}`")
+            lines.append("")
+            lines.append("</details>")
+            lines.append("")
+        return "\n".join(lines).rstrip() + "\n"
     else:
-        if issue_trend and (issue_trend.get("trend_summary") or issue_trend.get("themes")):
+        # Prefer LLM-generated digest → fallback to trend → fallback to simple stats.
+        if issue_digest and (issue_digest.get("lede") or issue_digest.get("highlights")):
+            headline = _md_escape(str(issue_digest.get("headline") or "")).strip()
+            if headline:
+                lines.append(f"**{headline}**")
+                lines.append("")
+            lede = _md_escape(str(issue_digest.get("lede") or "")).strip()
+            if lede:
+                lines.append(lede)
+                lines.append("")
+
+            highlights = issue_digest.get("highlights") or []
+            if isinstance(highlights, list) and highlights:
+                lines.append("**Highlights**")
+                for h in highlights:
+                    hh = _md_escape(str(h))
+                    if hh:
+                        lines.append(f"- {hh}")
+                lines.append("")
+
+            themes = issue_digest.get("themes") or []
+            if isinstance(themes, list) and themes:
+                lines.append("**Themes**")
+                for t in themes:
+                    tt = _md_escape(str(t))
+                    if tt:
+                        lines.append(f"- {tt}")
+                lines.append("")
+
+            keywords = issue_digest.get("keywords") or []
+            if isinstance(keywords, list) and keywords:
+                lines.append("**Keywords**")
+                for k in keywords:
+                    kk = _md_escape(str(k))
+                    if kk:
+                        lines.append(f"- {kk}")
+                lines.append("")
+
+        elif issue_trend and (issue_trend.get("trend_summary") or issue_trend.get("themes")):
             summary_text = _md_escape(str(issue_trend.get("trend_summary") or "")).strip()
             if summary_text:
                 lines.append(summary_text)
@@ -242,10 +298,71 @@ def _render_issue_markdown(
                     lines.append(f"- {w} ({n})")
                 lines.append("")
 
-    lines.extend(["## arXiv: New Papers", ""])
+    lines.append(f"**Total new papers:** {len(items)}")
+    lines.append("")
+
+    # Select featured papers.
+    featured_papers = max(1, int(featured_papers))
+    item_by_id = {i.get("id"): i for i in items if i.get("id")}
+    featured_ids: list[str] = []
+    if issue_digest and isinstance(issue_digest.get("featured_ids"), list):
+        featured_ids = [str(x) for x in issue_digest["featured_ids"] if str(x)]
+
+    featured: list[dict[str, Any]] = []
+    used: set[str] = set()
+    for fid in featured_ids:
+        it = item_by_id.get(fid)
+        if it and fid not in used:
+            featured.append(it)
+            used.add(fid)
+        if len(featured) >= featured_papers:
+            break
+    for it in items:
+        iid = it.get("id")
+        if iid and iid in used:
+            continue
+        if len(featured) >= featured_papers:
+            break
+        featured.append(it)
+        if iid:
+            used.add(iid)
+
+    other = [it for it in items if (it.get("id") not in used)]
+
+    lines.extend(["## Featured Papers", ""])
+    lines.extend(_render_item_blocks(items=featured, summaries=summaries, heading_level=3))
+
+    if include_more_section and other:
+        more_titles_max = max(0, int(more_titles_max))
+        shown = other if more_titles_max == 0 else other[:more_titles_max]
+        remaining = len(other) - len(shown)
+
+        lines.append(f"<details><summary>More papers ({len(other)})</summary>")
+        lines.append("")
+
+        groups = _group_items_by_query(shown, queries)
+        for group_name, group_items in groups:
+            if group_name != "All":
+                lines.append(f"**{_md_escape(group_name)}**")
+            for it in group_items:
+                title = _md_escape(it.get("title", "Untitled"))
+                url = _md_escape(it.get("url", ""))
+                if url:
+                    lines.append(f"- [{title}]({url})")
+                else:
+                    lines.append(f"- {title}")
+            lines.append("")
+
+        if remaining > 0:
+            lines.append(f"_…and {remaining} more._")
+            lines.append("")
+
+        lines.append("</details>")
+        lines.append("")
 
     if queries:
-        lines.append("**Query**")
+        lines.append("<details><summary>Search definitions</summary>")
+        lines.append("")
         for q in queries:
             name = (q.get("name") or "").strip()
             sq = (q.get("search_query") or "").strip()
@@ -254,20 +371,8 @@ def _render_issue_markdown(
             elif sq:
                 lines.append(f"- `{sq}`")
         lines.append("")
-
-    if not items:
-        return "\n".join(lines).rstrip() + "\n"
-
-    groups = _group_items_by_query(items, queries)
-    if len(groups) == 1 and groups[0][0] == "All":
-        lines.extend(_render_item_blocks(items=groups[0][1], summaries=summaries, heading_level=3))
-        return "\n".join(lines).rstrip() + "\n"
-
-    for group_name, group_items in groups:
-        if group_name != "All":
-            lines.append(f"### {group_name}")
-            lines.append("")
-        lines.extend(_render_item_blocks(items=group_items, summaries=summaries, heading_level=4))
+        lines.append("</details>")
+        lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
 
@@ -351,15 +456,22 @@ def main() -> int:
     if not isinstance(issues, dict):
         issues = {}
     issue_trend = None
+    issue_digest = None
     if date_jst in issues and isinstance(issues.get(date_jst), dict):
         issue_trend = issues[date_jst].get("trend")
         if not isinstance(issue_trend, dict):
             issue_trend = None
+        issue_digest = issues[date_jst].get("digest")
+        if not isinstance(issue_digest, dict):
+            issue_digest = None
 
     new_items = stable_sort_items(compute_new_items(collected, state))
     lookback_days = coerce_int(config.get("issue", {}).get("lookback_days"), default=0)
     issue_items = stable_sort_items(filter_items_by_lookback(new_items, lookback_days))
     skipped_count = max(0, len(new_items) - len(issue_items))
+    featured_papers = coerce_int(config.get("issue", {}).get("featured_papers"), default=12)
+    include_more_section = bool(config.get("issue", {}).get("include_more_section", True))
+    more_titles_max = coerce_int(config.get("issue", {}).get("more_titles_max"), default=80)
 
     issue_path = paths.issues_dir / f"{date_jst}.md"
     issue_changed = False
@@ -377,8 +489,12 @@ def main() -> int:
             items=issue_items,
             summaries=summaries,
             issue_trend=issue_trend,
+            issue_digest=issue_digest,
             lookback_days=lookback_days,
             skipped_count=skipped_count,
+            featured_papers=featured_papers,
+            include_more_section=include_more_section,
+            more_titles_max=more_titles_max,
         )
         issue_changed = write_text_if_changed(issue_path, issue_md)
 

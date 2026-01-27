@@ -36,6 +36,9 @@ def load_config(config_path: Path) -> dict[str, Any]:
     config.setdefault("issue", {})
     config["issue"].setdefault("lookback_days", 0)
     config["issue"].setdefault("mark_skipped_as_seen", False)
+    config["issue"].setdefault("featured_papers", 12)
+    config["issue"].setdefault("include_more_section", True)
+    config["issue"].setdefault("more_titles_max", 80)
 
     config.setdefault("data", {})
     config["data"].setdefault("state_path", "data/state.json")
@@ -55,6 +58,8 @@ def load_config(config_path: Path) -> dict[str, Any]:
     config["llm"].setdefault("max_items", 10)
     config["llm"].setdefault("trend_enabled", True)
     config["llm"].setdefault("trend_max_items", 25)
+    config["llm"].setdefault("digest_enabled", True)
+    config["llm"].setdefault("digest_max_items", 40)
     config["llm"].setdefault("temperature", 0)
 
     return config

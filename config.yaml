@@ -22,6 +22,11 @@ issue:
   lookback_days: 1
   # If true, unseen items outside lookback are marked as seen (skipped).
   mark_skipped_as_seen: true
+  # How many papers to fully render (title/authors/summary).
+  featured_papers: 12
+  # Optionally include the remaining papers as a collapsed title-only list.
+  include_more_section: true
+  more_titles_max: 80
 
 data:
   state_path: "data/state.json"
@@ -38,7 +43,9 @@ llm:
   model:
     deepseek: "deepseek-chat"
     openai: "gpt-4o-mini"
-  max_items: 10
+  max_items: 12
   trend_enabled: true
   trend_max_items: 25
+  digest_enabled: true
+  digest_max_items: 40
   temperature: 0
