@@ -127,8 +127,12 @@ def filter_items_by_lookback(
     if lookback_days == 0:
         return items_list
 
+    # Interpret lookback in terms of calendar days in JST, not a strict rolling
+    # N*24h window. This is more stable for a daily workflow that runs at a fixed
+    # time (07:00 JST) and for sources that publish around specific daily times.
     now_utc = (now_utc or datetime.now(timezone.utc)).astimezone(timezone.utc)
-    cutoff = now_utc - timedelta(days=lookback_days)
+    now_jst = now_utc.astimezone(JST)
+    cutoff_date_jst = now_jst.date() - timedelta(days=lookback_days)
 
     filtered: list[dict[str, Any]] = []
     for item in items_list:
@@ -136,7 +140,8 @@ def filter_items_by_lookback(
         if published_dt is None:
             filtered.append(item)
             continue
-        if published_dt >= cutoff:
+        published_date_jst = published_dt.astimezone(JST).date()
+        if published_date_jst >= cutoff_date_jst:
             filtered.append(item)
     return filtered
 

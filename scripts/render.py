@@ -505,7 +505,17 @@ def main() -> int:
 
     # Update state deterministically (only changes once per day unless new IDs appear).
     mark_skipped = bool(config.get("issue", {}).get("mark_skipped_as_seen", False))
-    ids_to_mark = new_items if (lookback_days == 0 or mark_skipped) else issue_items
+    # Only mark items as seen when we actually include them, unless explicitly
+    # skipping backlog AND the issue contains at least one included item.
+    #
+    # This prevents a "black hole" where a too-strict time filter yields an empty
+    # issue and then marks everything as seen anyway.
+    if lookback_days == 0:
+        ids_to_mark = new_items
+    elif mark_skipped and issue_items:
+        ids_to_mark = new_items
+    else:
+        ids_to_mark = issue_items
     new_ids = [i.get("id") for i in ids_to_mark if i.get("id")]
     seen_ids = set(state.get("seen_ids") or [])
     for nid in new_ids:
