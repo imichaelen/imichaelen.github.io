@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <title>Learning Systems: States, Worlds, and Effective Variational Principles | Michael Shen&#39;s Personal Blog</title>
+    <link rel='shortcut icon' href='https://imichaelen.github.io/favicon.ico?v=1588008319075' />
+    <link href='https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css' rel='stylesheet' />
+    <link rel='stylesheet' href='https://imichaelen.github.io/styles/main.css' />
+    <link rel='alternate' type='application/atom+xml' title='Learning Systems: States, Worlds, and Effective Variational Principles | Michael Shen&#39;s Personal Blog - Atom Feed' href='https://imichaelen.github.io/atom.xml' />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' />
+    <script async src='https://www.googletagmanager.com/gtag/js?id=UA-163713322-1'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-163713322-1');
+    </script>
+    <meta name='description' content='A mathematical note on why theories of learning should specify the world, quotient state space, training dynamics, and invariant observables before invoking variational principles.' />
+    <meta name='keywords' content='deep learning theory,quotient state space,generalization,variational principles,implicit bias' />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css' />
+    <script src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js'></script>
+    <script defer src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'></script>
+  </head>
+  <body>
+    <div class='main'>
+      <div class='main-content'>
+        <div class='site-header'>
+          <a href='https://imichaelen.github.io'><img class='avatar' src='https://imichaelen.github.io/images/avatar.png?v=1588008319075' alt='' /></a>
+          <h1 class='site-title'>Michael Shen&#39;s Personal Blog</h1>
+          <p class='site-description'>Cheer for the Biangbiang Noodles and Eiffel Tower!</p>
+          <div class='menu-container'>
+            <a href='/' class='menu'> Home </a>
+            <a href='/archives' class='menu'> History </a>
+            <a href='/daily/' class='menu'> Daily </a>
+            <a href='/tags' class='menu'> Tags </a>
+            <a href='/post/about' class='menu'> About </a>
+            <a href='https://imichaelen.github.io/post/leave-a-message' class='menu'>BBS</a>
+          </div>
+          <div class='social-container'><a href='https://github.com/imichaelen' target='_blank'><i class='ri-github-line'></i></a></div>
+        </div>
+
+        <div class='post-detail'>
+          <article class='post'>
+            <h2 class='post-title'>Learning Systems: States, Worlds, and Effective Variational Principles</h2>
+            <div class='post-info'><span> 2026-06-18 </span><span> 10 min read </span></div>
+            <div class='post-content-wrapper'>
+              <div class='post-content'>
+                <p>A basic difficulty in the theory of deep learning is that empirical training takes place in a huge parameter space, while the meaningful objects of the theory are rarely the raw parameters themselves. If the parameter vector is treated as the physical state of the learning system, many geometric statements immediately become contaminated by redundancy: neurons may be permuted, homogeneous networks may be rescaled, hidden coordinates may be changed, and distinct parameter points may represent the same input-output function.</p>
+
+                <p>A mathematical theory of learning should distinguish at least three objects: the parameter coordinate \(\theta\in\Theta\), the input-output map \(f_\theta:\mathcal X\to\mathcal Y\), and a more complete learning state \(s_\theta\in\mathcal S\). The parameter is a coordinate. The function is a projection. The state should contain the structures that remain meaningful for the problem under consideration: functions, representations, prediction distributions, local responses, training geometry, and possibly the optimizer-induced noise.</p>
+
+                <h2 id='quotient-state-space'>1. Quotient state space</h2>
+                <p>Suppose a network has hidden representations \(H_1^\theta(x),\ldots,H_L^\theta(x)\) and predictive distribution \(p_\theta(y|x)\). Given a data distribution \(\rho(x,y)\), consider the joint law</p>
+                <p>\[\Pi_\theta=\operatorname{Law}_\rho\left(X,Y,H_1^\theta(X),\ldots,H_L^\theta(X),p_\theta(\cdot|X)\right).\]</p>
+                <p>If only frozen prediction is relevant, this object can be projected down to \(p_\theta(\cdot|x)\). But if transfer, robustness, probing, fine-tuning response, or training dynamics are relevant, the output function alone is not enough. Two networks can agree on a task while having different hidden representations, different Jacobians, different tangent kernels, and different future training responses.</p>
+                <p>Let \(\mathcal G\) denote the gauge-like redundancies of the architecture: neuron permutations, positive rescalings in ReLU networks, hidden-basis changes in deep linear networks, and other reparameterizations that leave the relevant predictor invariant. A more reasonable state is a quotient object,</p>
+                <p>\[s_\theta=[\Pi_\theta,B_\theta,N_\theta]/\mathcal G.\]</p>
+                <p>Here \(B_\theta\) denotes the optimizer-induced response geometry. For invariant observables \(O\) and \(O'\), one may write</p>
+                <p>\[B_\theta(O,O')=\nabla_\theta O^\top M_\theta^{-1}\nabla_\theta O',\]</p>
+                <p>where \(M_\theta\) is the metric or preconditioner induced by the optimizer. If training is stochastic, one also needs the projected noise covariance</p>
+                <p>\[N_\theta(O,O')=\nabla_\theta O^\top M_\theta^{-1}\Sigma_\theta M_\theta^{-1}\nabla_\theta O'.\]</p>
+                <p>Static equivalence need not imply dynamical equivalence. Two parameter settings may represent the same function, yet ordinary Euclidean SGD may continue from them along different quotient trajectories. The optimizer therefore contributes to the geometry and noise of the learning state.</p>
+
+                <h2 id='world-relative-generalization'>2. World-relative generalization</h2>
+                <p>A function does not generalize in isolation. Generalization is meaningful only relative to a world, a future evaluation ecology, and a loss. A useful abstraction is</p>
+                <p>\[W=(\mathcal Z,G,R,\Pi,\mathcal I,\Lambda).\]</p>
+                <p>Here \(\mathcal Z\) is a latent-variable space, \(G\) is a generative or causal structure, \(R\) is a rendering mechanism from latent variables to observations, \(\Pi\) is a task ecology, \(\mathcal I\) is a family of interventions or distribution shifts, and \(\Lambda\) is the evaluation ecology.</p>
+                <p>If a task \(\tau\sim\Pi\) produces training data from \(P_{\mathrm{train}}^\tau\), while future test distributions are sampled from \(Q\sim\Lambda(\tau)\), then the relevant risk is not an intrinsic property of \(f\), but something like</p>
+                <p>\[\mathcal R_\Lambda(f;W)=\mathbb E_{\tau\sim\Pi}\mathbb E_{Q\sim\Lambda(\tau)}[R_Q(f_\tau)].\]</p>
+                <p>Thus generalization is a relation among \((f,W,P_{\mathrm{train}},\Lambda,\ell)\), not a property of \(f\) alone. This matters whenever causal and spurious features coincide in the training distribution. A theory that sees only empirical loss can explain interpolation, but not world-relative generalization.</p>
+
+                <h2 id='training-as-path-measure'>3. Training as a path measure</h2>
+                <p>Given \(W\), a model class \(\mathcal M\), a training algorithm \(A\), and a state space \(\mathcal S\), training should be regarded as inducing a probability measure on state trajectories:</p>
+                <p>\[s_{0:T}=(s_t)_{0\le t\le T},\qquad \mathbb P_{W,A,\mathcal M}(s_{0:T}).\]</p>
+                <p>The endpoint distribution is the pushforward</p>
+                <p>\[\mu_{W,A,\mathcal M,T}=(s_T)_\#\mathbb P_{W,A,\mathcal M}.\]</p>
+                <p>In overparameterized learning, the empirical data often define a large interpolation set</p>
+                <p>\[\mathcal S_0=\{s\in\mathcal S: L_{\mathrm{train}}(s)=0\}.\]</p>
+                <p>The central question is not merely whether training reaches \(\mathcal S_0\), but what measure the algorithm induces on \(\mathcal S_0\). Different optimizers, learning-rate schedules, initialization scales, batch sizes, noise levels, and explicit regularizers may induce different endpoint measures, \(\mu_A^{\mathcal S}\neq\mu_{A'}^{\mathcal S}\). This is a general formulation of implicit bias.</p>
+
+                <h2 id='effective-variational-principles'>4. Effective variational principles</h2>
+                <p>A variational principle for learning, if it exists, should not be written as a universal action \(\mathcal A_{\mathrm{learning}}\). It should be indexed:</p>
+                <p>\[\mathcal A_{W,A,\mathcal M}.\]</p>
+                <p>It depends on the world, architecture, optimizer, noise model, quotient state space, and observables to be predicted. More precisely, a defensible action should be derived from the training-induced path measure.</p>
+                <p>If the quotient dynamics admits the stochastic approximation</p>
+                <p>\[ds_t=b_{W,A,\mathcal M}(s_t)dt+\sqrt{\varepsilon}\,\sigma_{W,A,\mathcal M}(s_t)dB_t,\]</p>
+                <p>with \(D(s)=\sigma(s)\sigma(s)^\top\), then a small-noise large-deviation functional has the form</p>
+                <p>\[I_{W,A,\mathcal M}[s]=\frac12\int_0^T\left|\dot s_t-b_{W,A,\mathcal M}(s_t)\right|^2_{D(s_t)^+}dt+I_{\mathrm{boundary}}+I_{\mathrm{volume}}.\]</p>
+                <p>In deterministic gradient-flow or proximal regimes, the more natural form may be a minimizing movement principle,</p>
+                <p>\[s_{k+1}=\arg\min_{s\in\mathcal S}\left[V(s)+\frac{1}{2\eta}d_G^2(s,s_k)\right],\]</p>
+                <p>where \(d_G\) is induced by the optimizer and model geometry. The metric is not chosen because it is aesthetically convenient; it must come from the training rule or the model class.</p>
+                <p>A possible effective free energy may be written schematically as</p>
+                <p>\[F(s)=V_W(s)+C_{\mathcal M}(s)-T_A S_{\mathcal M,A}(s)+J_W(s).\]</p>
+                <p>Each term requires provenance. \(V_W\) comes from the task or population loss. \(C_{\mathcal M}\) must come from an explicit prior, coding model, regularizer, initialization distribution, or architecture. \(S_{\mathcal M,A}\) is meaningful only after specifying a quotient measure or training-induced volume form. \(T_A\) must be derived from optimizer noise. \(J_W\), an intervention-stability term, is legitimate only if the learner has access to the relevant intervention structure through data, augmentation, multiple environments, causal labels, architectural symmetry, or training protocol. A term introduced only after observing the result is not a principle; it is a fitted explanation.</p>
+
+                <h2 id='minimal-example'>5. A minimal example</h2>
+                <p>Let \(y\in\{-1,+1\}\), and suppose there are two observed features</p>
+                <p>\[x_c=y,\qquad x_s=y.\]</p>
+                <p>The feature \(x_c\) is causal or invariant. The feature \(x_s\) is spurious. In the observational training distribution, they are perfectly correlated. In the intervention ecology, \(x_c=y\) remains true while \(x_s=\zeta\), with \(\zeta\perp y\).</p>
+                <p>Consider the overparameterized linear model</p>
+                <p>\[f_\theta(x)=\sum_{i=1}^{m_c}\theta_{c,i}x_c+\sum_{j=1}^{m_s}\theta_{s,j}x_s.\]</p>
+                <p>Define quotient coordinates</p>
+                <p>\[q_c=\sum_{i=1}^{m_c}\theta_{c,i},\qquad q_s=\sum_{j=1}^{m_s}\theta_{s,j}.\]</p>
+                <p>The observational squared loss is</p>
+                <p>\[L_0(q_c,q_s)=\frac12(q_c+q_s-1)^2,\]</p>
+                <p>so the interpolation set is \(q_c+q_s=1\). Under intervention, the risk is</p>
+                <p>\[R_{\mathrm{int}}(q_c,q_s)=(q_c-1)^2+q_s^2,\]</p>
+                <p>whose optimum is \((q_c,q_s)=(1,0)\).</p>
+                <p>But full-batch Euclidean gradient descent from zero initialization on \(L_0\) induces the quotient dynamics</p>
+                <p>\[\dot q_c=-m_c(q_c+q_s-1),\qquad \dot q_s=-m_s(q_c+q_s-1).\]</p>
+                <p>Therefore the selected interpolating endpoint is</p>
+                <p>\[q_c^\star=\frac{m_c}{m_c+m_s},\qquad q_s^\star=\frac{m_s}{m_c+m_s}.\]</p>
+                <p>Even though the world contains an invariant feature, the training process need not select it. If the spurious feature has larger parameter multiplicity, the optimizer may select the spurious direction more strongly.</p>
+                <p>The induced quotient metric is</p>
+                <p>\[|dq|_G^2=\frac{dq_c^2}{m_c}+\frac{dq_s^2}{m_s}.\]</p>
+                <p>Hence the endpoint is the minimum quotient-norm interpolant,</p>
+                <p>\[(q_c^\star,q_s^\star)=\arg\min_{q_c+q_s=1}\left(\frac{q_c^2}{m_c}+\frac{q_s^2}{m_s}\right).\]</p>
+                <p>If intervention-augmented data are added with probability \(r>0\), the population loss becomes</p>
+                <p>\[L_r(q_c,q_s)=\frac{1-r}{2}(q_c+q_s-1)^2+\frac r2\left[(q_c-1)^2+q_s^2\right],\]</p>
+                <p>and the unique population optimum is \((q_c,q_s)=(1,0)\). The example separates world structure, training data, optimizer bias, and architecture multiplicity.</p>
+
+                <h2 id='selection-principles'>6. Selection principles</h2>
+                <p>The mathematical problem is this: given a world \(W\), a model class \(\mathcal M\), a training algorithm \(A\), and a quotient state space \(\mathcal S\), determine whether the training-induced path measure concentrates on invariant structures that remain stable under the evaluation ecology of \(W\).</p>
+                <p>An endpoint formulation asks whether</p>
+                <p>\[s_T\in\arg\min_{s\in\mathcal S_0}F_{W,A,\mathcal M}(s),\]</p>
+                <p>for a pre-specified effective functional. A path formulation asks whether</p>
+                <p>\[s_{0:T}\approx\arg\min I_{W,A,\mathcal M}[s_{0:T}].\]</p>
+                <p>Such statements have content only if the world is specified, the state space is a quotient or coordinate-independent object, the optimizer-induced metric or noise is explicit, the predicted observables are gauge-invariant, the functional is fixed before observing the trajectory, and the theory can make wrong predictions.</p>
+                <p>Existing theories can be interpreted as restricted selection principles: NTK in the lazy-training limit, mean-field theory in wide distributional limits, maximum-margin implicit bias in separable homogeneous regimes, information bottleneck as an endpoint variational principle over representations, flatness only after a quotient measure is specified, optimal transport or Schrodinger bridge only when the state and reference dynamics are specified, and scaling laws as macroscopic regularities rather than microscopic path principles.</p>
+                <p>The fundamental question is therefore not whether artificial intelligence has a universal least-action principle. A sharper question is:</p>
+                <p>\[\boxed{\text{In what world }W,\text{ under what training dynamics }A,\text{ on what quotient state space }\mathcal S,\text{ does learning select what invariant structure?}}\]</p>
+                <p>If a variational formulation exists, it should be understood as training-induced variational selection on quotient state spaces, or more explicitly, optimizer-induced path measures over world-relative invariant observables. This language is less elegant than a universal least-action principle, but it avoids coordinate artifacts in parameter space, undefined notions of generalization, and variational functionals fitted after the fact.</p>
+              </div>
+              <div class='toc-container'></div>
+            </div>
+          </article>
+        </div>
+
+        <div class='site-footer'>
+          <a class='rss' href='https://imichaelen.github.io/atom.xml' target='_blank'><i class='ri-rss-line'></i> RSS</a>
+        </div>
+      </div>
+    </div>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
