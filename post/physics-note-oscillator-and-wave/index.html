@@ -38,21 +38,20 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "UA-163713322-1");
     </script>
 
     <meta
       name="description"
-      content="
-..."
+      content="A short physics note explaining how the wave equation emerges from coupled oscillators and how normal modes diagonalize the motion."
     />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="physics,oscillator,wave,normal modes,Lagrangian" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"
     />
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   </head>
   <body>
     <div class="main">
@@ -71,13 +70,10 @@
           </p>
           <div class="menu-container">
             <a href="/" class="menu"> Home </a>
-
             <a href="/archives" class="menu"> History </a>
-
+            <a href="/daily/" class="menu"> Daily </a>
             <a href="/tags" class="menu"> Tags </a>
-
             <a href="/post/about" class="menu"> About </a>
-
             <a
               href="https://imichaelen.github.io/post/leave-a-message"
               class="menu"
@@ -102,13 +98,208 @@
 
             <div class="post-content-wrapper">
               <div class="post-content">
-                <figure data-type="image" tabindex="1">
-                  <img
-                    src="https://imichaelen.github.io/post-images/1588008307992.png"
-                    alt=""
-                    loading="lazy"
-                  />
-                </figure>
+                <p>
+                  A useful way to understand waves is to stop treating them as a
+                  new kind of object. A wave is what a collection of coupled
+                  oscillators looks like after the correct collective coordinates
+                  have been chosen. The harmonic oscillator is the local unit;
+                  the wave is the diagonalized motion of many such units.
+                </p>
+
+                <h2 id="single-oscillator">1. The single oscillator</h2>
+                <p>
+                  The harmonic oscillator is the minimal model of motion near a
+                  stable equilibrium. If \(q(t)\) is the displacement from
+                  equilibrium, the Lagrangian is
+                </p>
+                <p>
+                  \[
+                  L=\frac{1}{2}m\dot q^2-\frac{1}{2}kq^2 .
+                  \]
+                </p>
+                <p>
+                  The Euler--Lagrange equation gives
+                </p>
+                <p>
+                  \[
+                  m\ddot q+kq=0,
+                  \qquad
+                  \omega_0=\sqrt{\frac{k}{m}} .
+                  \]
+                </p>
+                <p>
+                  The solution is a rotation in phase space,
+                  \(q(t)=A\cos(\omega_0t+\phi)\). The important point is not the
+                  sinusoidal form itself, but the fact that a quadratic energy
+                  produces a linear equation, and a linear equation can be
+                  decomposed into independent modes.
+                </p>
+
+                <h2 id="coupled-oscillators">2. Coupled oscillators</h2>
+                <p>
+                  A wave appears when many oscillators are coupled. Consider a
+                  one-dimensional chain with displacement \(u_n(t)\), mass \(m\),
+                  lattice spacing \(a\), and nearest-neighbor spring constant
+                  \(K\). A simple Lagrangian is
+                </p>
+                <p>
+                  \[
+                  L=\sum_n\left[
+                  \frac{1}{2}m\dot u_n^2
+                  -\frac{1}{2}K(u_{n+1}-u_n)^2
+                  \right].
+                  \]
+                </p>
+                <p>
+                  The equation of motion is
+                </p>
+                <p>
+                  \[
+                  m\ddot u_n=K(u_{n+1}-2u_n+u_{n-1}).
+                  \]
+                </p>
+                <p>
+                  Translation symmetry suggests the normal-mode ansatz
+                </p>
+                <p>
+                  \[
+                  u_n(t)=A e^{i(kna-\omega t)} .
+                  \]
+                </p>
+                <p>
+                  Substitution gives the dispersion relation
+                </p>
+                <p>
+                  \[
+                  \omega(k)=2\sqrt{\frac{K}{m}}\,\left|\sin\frac{ka}{2}\right| .
+                  \]
+                </p>
+                <p>
+                  Each value of \(k\) labels an independent oscillator. The many
+                  body problem has not disappeared; it has been diagonalized.
+                  The wave is the language in which the coupled system becomes a
+                  collection of independent harmonic motions.
+                </p>
+
+                <h2 id="continuum-limit">3. The continuum limit</h2>
+                <p>
+                  At long wavelength, \(ka\ll 1\), the dispersion becomes
+                </p>
+                <p>
+                  \[
+                  \omega(k)\simeq c|k|,
+                  \qquad
+                  c=a\sqrt{\frac{K}{m}} .
+                  \]
+                </p>
+                <p>
+                  In this limit the lattice displacement \(u_n(t)\) is replaced
+                  by a smooth field \(u(x,t)\), and
+                </p>
+                <p>
+                  \[
+                  u_{n+1}-2u_n+u_{n-1}\approx a^2\partial_x^2u .
+                  \]
+                </p>
+                <p>
+                  The equation of motion becomes the wave equation
+                </p>
+                <p>
+                  \[
+                  \partial_t^2u-c^2\partial_x^2u=0 .
+                  \]
+                </p>
+                <p>
+                  The continuum wave equation is therefore not an isolated
+                  postulate. It is the long-wavelength effective equation of a
+                  coupled oscillator system. The field \(u(x,t)\) is the coarse
+                  variable, and \(c\) is the emergent speed of information
+                  propagation through the chain.
+                </p>
+
+                <h2 id="field-action">4. Field action and energy</h2>
+                <p>
+                  The continuum wave equation follows from the action
+                </p>
+                <p>
+                  \[
+                  S[u]=\int dt\,dx\,
+                  \left[
+                  \frac{\rho}{2}(\partial_tu)^2
+                  -\frac{T}{2}(\partial_xu)^2
+                  \right],
+                  \qquad
+                  c=\sqrt{\frac{T}{\rho}} .
+                  \]
+                </p>
+                <p>
+                  Here \(ho\) is a mass density and \(T\) is an elastic
+                  stiffness or tension. The corresponding energy density is
+                </p>
+                <p>
+                  \[
+                  \mathcal E=
+                  \frac{\rho}{2}(\partial_tu)^2
+                  +\frac{T}{2}(\partial_xu)^2 .
+                  \]
+                </p>
+                <p>
+                  The first term is kinetic energy. The second is elastic
+                  energy stored in gradients. This is the field version of the
+                  oscillator energy \(p^2/2m+kq^2/2\): time variation and spatial
+                  variation exchange energy as the wave propagates.
+                </p>
+
+                <h2 id="normal-modes">5. Boundary conditions and normal modes</h2>
+                <p>
+                  On a finite interval \(0<x<L\), boundary conditions select a
+                  discrete set of modes. For fixed ends,
+                </p>
+                <p>
+                  \[
+                  u(0,t)=u(L,t)=0,
+                  \]
+                </p>
+                <p>
+                  the normal modes are
+                </p>
+                <p>
+                  \[
+                  u_n(x,t)=A_n\sin\frac{n\pi x}{L}\cos(\omega_nt+\phi_n),
+                  \qquad
+                  \omega_n=c\frac{n\pi}{L} .
+                  \]
+                </p>
+                <p>
+                  The continuous field has become a countable collection of
+                  oscillators. This is the same idea in reverse: many coupled
+                  local degrees of freedom become independent collective modes.
+                </p>
+
+                <h2 id="physical-picture">6. Physical picture</h2>
+                <p>
+                  The conceptual chain is
+                </p>
+                <p>
+                  \[
+                  \text{stable equilibrium}
+                  \rightarrow
+                  \text{harmonic oscillator}
+                  \rightarrow
+                  \text{coupled oscillators}
+                  \rightarrow
+                  \text{normal modes}
+                  \rightarrow
+                  \text{waves}.
+                  \]
+                </p>
+                <p>
+                  The oscillator is local. The wave is collective. The normal
+                  mode is the coordinate system in which the collective motion
+                  becomes simple. In this sense, waves are not fundamentally more
+                  mysterious than oscillators; they are oscillators seen through
+                  the correct symmetry-adapted variables.
+                </p>
               </div>
               <div class="toc-container"></div>
             </div>
@@ -137,8 +328,8 @@
             repo: "imichaelen.github.io",
             owner: "imichaelen",
             admin: ["imichaelen"],
-            id: location.pathname.substring(0, 49), // Ensure uniqueness and length less than 50
-            distractionFreeMode: false, // Facebook-like distraction free mode
+            id: location.pathname.substring(0, 49),
+            distractionFreeMode: false,
           });
 
           gitalk.render("gitalk-container");
@@ -158,46 +349,6 @@
 
     <script>
       hljs.initHighlightingOnLoad();
-
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
-
-      window.addEventListener("scroll", (event) => {
-        let fromTop = window.scrollY;
-
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(
-            decodeURI(link.hash).substring(1)
-          );
-          let nextSection = null;
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(
-              decodeURI(mainNavLinks[index + 1].hash).substring(1)
-            );
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
     </script>
   </body>
 </html>
