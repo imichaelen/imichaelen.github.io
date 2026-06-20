@@ -2,7 +2,7 @@
 <feed xmlns='http://www.w3.org/2005/Atom'>
     <id>https://imichaelen.github.io</id>
     <title>Michael Shen&apos;s Personal Blog</title>
-    <updated>2026-06-18T00:00:00.000Z</updated>
+    <updated>2026-06-20T05:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel='alternate' href='https://imichaelen.github.io'/>
     <link rel='self' href='https://imichaelen.github.io/atom.xml'/>
@@ -10,6 +10,17 @@
     <logo>https://imichaelen.github.io/images/avatar.png</logo>
     <icon>https://imichaelen.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Michael Shen&apos;s Personal Blog</rights>
+    <entry>
+        <title type='html'><![CDATA[Designing Workflows for Unfinished Questions]]></title>
+        <id>https://imichaelen.github.io/post/designing-workflows-for-unfinished-questions/</id>
+        <link href='https://imichaelen.github.io/post/designing-workflows-for-unfinished-questions/'>
+        </link>
+        <updated>2026-06-20T05:00:00.000Z</updated>
+        <content type='html'><![CDATA[<p>A methodological note on AI-assisted research workflows: unfinished questions should be preserved only when they can change the next action and meet resistance.</p>
+<p><img src='https://imichaelen.github.io/post-images/unfinished-question-hero.svg' alt='Schematic for turning an unfinished question into a testable intervention'></p>
+<p><a href='https://imichaelen.github.io/post/designing-workflows-for-unfinished-questions/'>Read the note</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type='html'><![CDATA[Learning Systems: States, Worlds, and Effective Variational Principles]]></title>
         <id>https://imichaelen.github.io/post/learning-systems-states-worlds-and-effective-variational-principles/</id>
