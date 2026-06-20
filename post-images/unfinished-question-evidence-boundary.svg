@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">The boundary between promising language and evidence</title>
+  <desc id="desc">A schematic showing increasing contact with evidence from fluent proposal to independent measurement, with a stopping boundary before overclaiming.</desc>
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#3a6265"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="560" fill="#f8f5ef"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="80" y="72" fill="#23383b" font-size="29" font-weight="700">Do not mistake a sharper sentence for stronger evidence</text>
+    <text x="80" y="108" fill="#647174" font-size="17">The more a claim matters, the more it must move from language into independent contact.</text>
+
+    <line x1="170" y1="255" x2="1030" y2="255" stroke="#3a6265" stroke-width="4" marker-end="url(#arrow2)"/>
+
+    <g>
+      <circle cx="180" cy="255" r="32" fill="#fffdf8" stroke="#c8bba9" stroke-width="3"/>
+      <text x="180" y="260" text-anchor="middle" fill="#23383b" font-size="20" font-weight="700">1</text>
+      <text x="180" y="318" text-anchor="middle" fill="#23383b" font-size="19" font-weight="700">Fluent idea</text>
+      <text x="180" y="346" text-anchor="middle" fill="#657377" font-size="14">sounds plausible</text>
+    </g>
+
+    <g>
+      <circle cx="395" cy="255" r="32" fill="#fffdf8" stroke="#c8bba9" stroke-width="3"/>
+      <text x="395" y="260" text-anchor="middle" fill="#23383b" font-size="20" font-weight="700">2</text>
+      <text x="395" y="318" text-anchor="middle" fill="#23383b" font-size="19" font-weight="700">Structured frame</text>
+      <text x="395" y="346" text-anchor="middle" fill="#657377" font-size="14">testable shape</text>
+    </g>
+
+    <g>
+      <circle cx="610" cy="255" r="38" fill="#e7f2f0" stroke="#6aa8a3" stroke-width="4"/>
+      <text x="610" y="261" text-anchor="middle" fill="#23383b" font-size="21" font-weight="700">3</text>
+      <text x="610" y="318" text-anchor="middle" fill="#23383b" font-size="19" font-weight="700">Local check</text>
+      <text x="610" y="346" text-anchor="middle" fill="#4e6c70" font-size="14">useful, but limited</text>
+    </g>
+
+    <g>
+      <circle cx="825" cy="255" r="32" fill="#fff6e8" stroke="#d1a564" stroke-width="3"/>
+      <text x="825" y="260" text-anchor="middle" fill="#23383b" font-size="20" font-weight="700">4</text>
+      <text x="825" y="318" text-anchor="middle" fill="#23383b" font-size="19" font-weight="700">External contact</text>
+      <text x="825" y="346" text-anchor="middle" fill="#765d33" font-size="14">data or measurement</text>
+    </g>
+
+    <g opacity="0.55">
+      <circle cx="1038" cy="255" r="32" fill="#f5f0e7" stroke="#b9afa2" stroke-width="3"/>
+      <text x="1038" y="260" text-anchor="middle" fill="#23383b" font-size="20" font-weight="700">5</text>
+      <text x="1038" y="318" text-anchor="middle" fill="#23383b" font-size="19" font-weight="700">Adoption</text>
+      <text x="1038" y="346" text-anchor="middle" fill="#657377" font-size="14">only after contact</text>
+    </g>
+
+    <line x1="748" y1="166" x2="748" y2="386" stroke="#bd745d" stroke-width="3" stroke-dasharray="9 8"/>
+    <text x="748" y="148" text-anchor="middle" fill="#9d4f3c" font-size="18" font-weight="700">stopping boundary</text>
+
+    <rect x="104" y="418" width="992" height="76" rx="8" fill="#ffffff" stroke="#d4c8b8"/>
+    <text x="132" y="450" fill="#23383b" font-size="17" font-weight="700">Methodological warning</text>
+    <text x="132" y="478" fill="#59686a" font-size="15">If the next step would only add interpretation, scoring, or presentation, stop and wait for a stronger form of contact.</text>
+  </g>
+</svg>

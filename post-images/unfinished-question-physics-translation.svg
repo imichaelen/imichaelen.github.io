@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">How physics-inspired language was translated into workflow operations</title>
+  <desc id="desc">A labelled schematic showing physics-inspired words such as energy and frustration being translated into variables, controls, failure tests, and state updates.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#315f64"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="640" fill="#fbfaf7"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="72" y="72" fill="#20363a" font-size="31" font-weight="700">Physics language had to become an operation</text>
+    <text x="72" y="108" fill="#627174" font-size="17">The useful part was not the metaphor. It was the discipline of asking what the metaphor would make us do.</text>
+
+    <g stroke="#315f64" stroke-width="3" fill="none" marker-end="url(#arrow)">
+      <path d="M366 332 H442"/>
+      <path d="M758 332 H834"/>
+    </g>
+
+    <g>
+      <rect x="72" y="176" width="294" height="312" rx="10" fill="#ffffff" stroke="#d4cabd" stroke-width="2"/>
+      <text x="219" y="216" text-anchor="middle" fill="#20363a" font-size="21" font-weight="700">Tempting metaphor</text>
+      <text x="108" y="266" fill="#20363a" font-size="17" font-weight="700">Energy</text>
+      <text x="108" y="292" fill="#627174" font-size="14">looks like a score</text>
+      <text x="108" y="336" fill="#20363a" font-size="17" font-weight="700">Frustration</text>
+      <text x="108" y="362" fill="#627174" font-size="14">looks like disagreement</text>
+      <text x="108" y="406" fill="#20363a" font-size="17" font-weight="700">Phase shift</text>
+      <text x="108" y="432" fill="#627174" font-size="14">looks like a dramatic transition</text>
+    </g>
+
+    <g>
+      <rect x="442" y="154" width="316" height="356" rx="10" fill="#eef6f5" stroke="#6d9d9a" stroke-width="2"/>
+      <text x="600" y="194" text-anchor="middle" fill="#20363a" font-size="21" font-weight="700">Required translation</text>
+      <g fill="#20363a" font-size="16">
+        <circle cx="480" cy="252" r="8" fill="#6d9d9a"/>
+        <text x="500" y="258">Which variable changes?</text>
+        <circle cx="480" cy="306" r="8" fill="#6d9d9a"/>
+        <text x="500" y="312">What control blocks an easy pass?</text>
+        <circle cx="480" cy="360" r="8" fill="#6d9d9a"/>
+        <text x="500" y="366">What result would falsify the frame?</text>
+        <circle cx="480" cy="414" r="8" fill="#6d9d9a"/>
+        <text x="500" y="420">What future state changes?</text>
+      </g>
+    </g>
+
+    <g>
+      <rect x="834" y="176" width="294" height="312" rx="10" fill="#fff2e8" stroke="#c68463" stroke-width="2"/>
+      <text x="981" y="216" text-anchor="middle" fill="#20363a" font-size="21" font-weight="700">Decision rule</text>
+      <text x="981" y="276" text-anchor="middle" fill="#20363a" font-size="17" font-weight="700">Keep it</text>
+      <text x="981" y="304" text-anchor="middle" fill="#765747" font-size="15">
+        <tspan x="981" dy="0">if it predicts a different</tspan>
+        <tspan x="981" dy="22">experiment or stopping point</tspan>
+      </text>
+      <path d="M912 344 H1050" stroke="#d2bcae" stroke-width="2"/>
+      <text x="981" y="386" text-anchor="middle" fill="#20363a" font-size="17" font-weight="700">Drop it</text>
+      <text x="981" y="414" text-anchor="middle" fill="#765747" font-size="15">
+        <tspan x="981" dy="0">if it only makes the story</tspan>
+        <tspan x="981" dy="22">sound more physical</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

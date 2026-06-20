@@ -1,0 +1,997 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Designing Workflows for Unfinished Questions | Michael Shen&#39;s
+      Personal Blog
+    </title>
+    <link
+      rel="shortcut icon"
+      href="../../favicon.ico?v=1588008319075"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="../../styles/main.css"
+    />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Designing Workflows for Unfinished Questions | Michael Shen&#39;s Personal Blog - Atom Feed"
+      href="../../atom.xml"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700"
+    />
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-163713322-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-163713322-1");
+    </script>
+
+    <meta
+      name="description"
+      content="A methodological note on designing AI-assisted research workflows that keep unfinished questions alive only when they can change the next action and meet resistance."
+    />
+    <meta
+      name="keywords"
+      content="research workflow,AI-assisted research,problem formation,scientific method,experimentation"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css"
+    />
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <style>
+      .post-content .note-hero img,
+      .post-content .note-diagram img {
+        width: 100%;
+        border-radius: 6px;
+        display: block;
+      }
+
+      .post-content .caption {
+        color: #777;
+        font-size: 0.92em;
+        line-height: 1.55;
+        margin-top: 0.6em;
+        text-align: center;
+      }
+
+      .post-content .status-box {
+        border-left: 4px solid #6f9f9b;
+        background: #f6fbfa;
+        padding: 1em 1.2em;
+        margin: 1.6em 0;
+        border-radius: 4px;
+      }
+
+      .post-content .status-box p {
+        margin: 0.4em 0;
+      }
+
+      .post-content table {
+        border-collapse: collapse;
+        margin: 1.6em 0;
+        width: 100%;
+      }
+
+      .post-content th,
+      .post-content td {
+        border: 1px solid #ddd4c8;
+        padding: 0.7em;
+        vertical-align: top;
+      }
+
+      .post-content th {
+        background: #f4efe7;
+      }
+
+      .post-content blockquote {
+        border-left: 4px solid #d3a65f;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+          <a href="../../">
+            <img
+              class="avatar"
+              src="../../images/avatar.png?v=1588008319075"
+              alt=""
+            />
+          </a>
+          <h1 class="site-title">Michael Shen&#39;s Personal Blog</h1>
+          <p class="site-description">
+            Cheer for the Biangbiang Noodles and Eiffel Tower!
+          </p>
+          <div class="menu-container">
+            <a href="../../" class="menu"> Home </a>
+
+            <a href="../../archives" class="menu"> History </a>
+
+            <a href="../../tags" class="menu"> Tags </a>
+
+            <a href="../about" class="menu"> About </a>
+
+            <a
+              href="../leave-a-message"
+              class="menu"
+            >
+              BBS
+            </a>
+          </div>
+          <div class="social-container">
+            <a href="https://github.com/imichaelen" target="_blank">
+              <i class="ri-github-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Designing Workflows for Unfinished Questions
+            </h2>
+            <div class="post-info">
+              <span> 2026-06-20 </span>
+              <span> 15 min read </span>
+            </div>
+
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <figure class="note-hero" data-type="image" tabindex="1">
+                  <img
+                    src="../../post-images/unfinished-question-hero.svg"
+                    alt="Schematic for turning an unfinished question into a testable intervention"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    A research workflow is useful when an unresolved tension
+                    changes what is tried next.
+                  </figcaption>
+                </figure>
+
+                <div class="status-box">
+                  <p>
+                    <strong>Thesis:</strong> AI-assisted research workflows
+                    should not be judged by how convincing their explanations
+                    sound. They should be judged by whether unfinished questions
+                    become precise enough to meet resistance.
+                  </p>
+                  <p>
+                    <strong>Research question:</strong> can a language-model
+                    workflow turn an unresolved research tension into a
+                    non-obvious next action better than a direct prompt or a
+                    simple typed checklist?
+                  </p>
+                  <p>
+                    <strong>Design:</strong> compare simple and structured
+                    routes, then re-read their outputs through support checks,
+                    label checks, baseline comparisons, and bounded local
+                    checks.
+                  </p>
+                  <p>
+                    <strong>Result:</strong> the useful output was a sharper
+                    pause-and-reset question, not evidence that the larger
+                    workflow architecture should be trusted. The more portable
+                    contribution is a discipline for stopping before fluent
+                    interpretation outruns contact.
+                  </p>
+                </div>
+
+                <p>
+                  A surprisingly common failure mode in research tooling is that
+                  the system becomes better at describing a problem than at
+                  changing the research state. The language gets sharper. The
+                  diagrams get cleaner. The summaries become easier to read. But
+                  the next experiment, calculation, or counterexample remains
+                  basically unchanged.
+                </p>
+
+                <p>
+                  This note is about a method for resisting that failure. The
+                  method starts from a simple idea: an unfinished question is
+                  valuable only if it has causal force over future work. It
+                  should change what is remembered, what is tested, what is
+                  ignored, and when a line of thought is stopped.
+                </p>
+
+                <blockquote>
+                  <p>
+                    A question is alive when it changes the next action. If it
+                    only improves the wording of the story, it is not yet a
+                    research object.
+                  </p>
+                </blockquote>
+
+                <h2 id="unfinished-questions">
+                  1. Treat unfinishedness as a resource
+                </h2>
+
+                <p>
+                  In actual research, progress often begins with something that
+                  refuses to close: a measurement that does not fit the story, a
+                  limiting case that behaves differently than expected, a toy
+                  model that explains too much, or a proposed mechanism that
+                  cannot survive a simple control.
+                </p>
+
+                <p>
+                  The temptation is to resolve the tension quickly. An
+                  AI-assisted workflow makes that temptation stronger, because a
+                  language model can usually produce a smooth explanation for an
+                  incomplete situation. But smoothness is dangerous. A polished
+                  paragraph can erase the very friction that made the problem
+                  interesting.
+                </p>
+
+                <p>
+                  A better workflow preserves unfinishedness in a form that can
+                  be acted on. It does not merely say, "this is a deep tension."
+                  It asks: what observation would split the alternatives? What
+                  minimal model would make the ambiguity visible? What result
+                  would make us change the next step?
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="2">
+                  <img
+                    src="../../post-images/unfinished-question-loop.svg"
+                    alt="Schematic loop for keeping unfinished questions honest"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The loop is useful only when each pass changes the next
+                    action, not merely the description.
+                  </figcaption>
+                </figure>
+
+                <h2 id="system-interest">
+                  2. Interest is behavior, not psychology
+                </h2>
+
+                <p>
+                  I do not think an isolated model has human scientific
+                  interest. Human interest is embodied, historical, emotional,
+                  and social. It involves taste, embarrassment, persistence,
+                  risk, and a kind of personal ownership that current language
+                  models do not have.
+                </p>
+
+                <p>
+                  But a system can still implement a weaker and more useful
+                  substitute. A notebook, planning routine, code runner, review
+                  routine, and memory store can be arranged so that unresolved
+                  questions keep returning and keep shaping the next move. In
+                  that sense, "interest" becomes a property of the workflow:
+                </p>
+
+                <blockquote>
+                  <p>
+                    an unresolved question has interest-like force when it
+                    repeatedly changes attention, memory, tests, and stopping
+                    decisions.
+                  </p>
+                </blockquote>
+
+                <figure class="note-diagram" data-type="image" tabindex="3">
+                  <img
+                    src="../../post-images/unfinished-question-interest-architecture.png"
+                    alt="Schematic showing interest-like behavior as a workflow property rather than model psychology"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The useful substitute for curiosity is behavioral: the
+                    unresolved part must keep changing what the workflow
+                    attends to, remembers, tests, or stops.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  This distinction matters. The goal is not to make an AI sound
+                  curious. The goal is to make a research process less willing
+                  to close a question before it has encountered something that
+                  can push back.
+                </p>
+
+                <h2 id="physics-metaphors">
+                  3. Physics metaphors were tools, not claims
+                </h2>
+
+                <p>
+                  A lot of the design intuition came from physics: energy
+                  landscapes, frustration, phase changes, hysteresis,
+                  coarse-graining, and memory. Those words are attractive
+                  because they suggest that a research process might have
+                  structure: local traps, unresolved stress, slow relaxation,
+                  and transitions between regimes.
+                </p>
+
+                <p>
+                  But the experiment taught me to distrust the words unless
+                  they changed an operation. "Energy" was not allowed to mean
+                  "how much I like this idea." "Frustration" was not allowed to
+                  mean "several agents disagree." A physics-inspired concept
+                  had to name a variable, a control, a falsifying test, or a
+                  state update. Otherwise it was decoration.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="4">
+                  <img
+                    src="../../post-images/unfinished-question-physics-translation.svg"
+                    alt="Schematic translating physics-inspired words into variables, controls, falsifying tests, and state updates"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The useful move is translation: a metaphor earns its place
+                    only when it changes the next operation.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  The earliest version was more ambitious: Ising-like state
+                  graphs, energy and frustration scores, phase-shift metrics,
+                  Monte Carlo or annealing search, and mesh-like interaction
+                  between branches. I still think those are useful imagination
+                  tools. The experiment changed their status. They were no
+                  longer allowed to be claims about creativity; they became
+                  hypotheses about control. Each one had to say what it would
+                  measure, what move it would accept or reject, and what
+                  simpler baseline it had to beat.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="5">
+                  <img
+                    src="../../post-images/unfinished-question-physics-models.png"
+                    alt="Schematic summary of Ising-like graphs, energy, frustration, phase shifts, Monte Carlo, mesh search, and coarse-graining as operational hypotheses"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The original physics-inspired models were not discarded.
+                    They were demoted into operational hypotheses that had to
+                    earn their place.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  The clearest survivor was coarse-graining: it helped name a
+                  pause-and-reset fork between temporary kinetic memory and a
+                  more structural residue. That was a good question, not a
+                  finished result. The rest remained diagnostic or paused until
+                  a simpler loop could show action-changing value.
+                </p>
+
+                <h2 id="what-was-tested">4. What I actually tested</h2>
+
+                <p>
+                  I treated the workflow as a stress test rather than a product
+                  demo. The input was not a blank request for ideas; it was an
+                  already unfinished research situation with an ambiguity that
+                  needed to become a next action.
+                </p>
+
+                <p>
+                  The concrete case was a memory-like response problem: a system
+                  seemed to depend on its recent history, but it was unclear
+                  whether the relevant state was a gradually relaxing kinetic
+                  variable or a more persistent structural change. I used that
+                  case as a demanding testbed, not as a claim about the system
+                  itself.
+                </p>
+
+                <p>
+                  The comparison had three practical reference points: a direct
+                  prompt, a typed checklist, and a richer staged workflow that
+                  preserved alternatives, asked for a bounded check, and forced
+                  a revision after either an observation or a clear blocker.
+                  The question was whether the richer process changed the
+                  action, not whether it produced a more impressive essay.
+                </p>
+
+                <p>
+                  The experiment therefore had three layers. The first layer
+                  generated candidate problem frames under comparable budgets.
+                  The second layer audited whether those frames were supported,
+                  testable, and not merely shaped by prompt labels. The third
+                  layer asked whether a candidate could travel all the way from
+                  a proposed frame to a bounded action, a check or a precise
+                  reason the check could not run, an observation, and an
+                  updated next move.
+                </p>
+
+                <p>
+                  Operationally, this made the experiment less like a contest
+                  between writing styles and more like a state-transition test:
+                  different routes could generate a candidate frame, but every
+                  route had to pass through the same audit boundary and then
+                  become either a bounded check, a precise blocker, or a changed
+                  next move.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="6">
+                  <img
+                    src="../../post-images/unfinished-question-experimental-model.png"
+                    alt="Experimental model flowchart from unfinished case through candidate generation, shared audit checks, bounded local check or blocker, reflection update, and continue, repair, or stop decision"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The experimental model: different routes were allowed, but
+                    every route had to pass through the same audit and contact
+                    chain.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  In practice this meant several repeated constructions, not
+                  one impressive run: direct prompting, typed baselines, richer
+                  staged workflows, checks for labels biasing the output,
+                  revisiting saved outputs, and finally pushing the strongest
+                  local frame toward a discriminating test. The purpose was to
+                  learn where structure actually changes research motion, and
+                  where it only makes the same motion easier to narrate.
+                </p>
+
+                <p>
+                  The stress test had to be falsifiable in three ordinary ways.
+                  First, a richer workflow had to differ from a plain request
+                  or a careful checklist. Second, the difference had to survive
+                  checks for labels steering the answer. Third, the result had
+                  to move beyond a frame into a bounded action, a check or a
+                  precise blocker, and a changed next move. Failing any one of
+                  those tests meant the system had made a better artifact, not
+                  necessarily a better research state.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="7">
+                  <img
+                    src="../../post-images/unfinished-question-experiment-atlas.png"
+                    alt="Schematic map of generation, comparison, filtering, pushback, and stopping lessons from the experiment"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    A compact matrix of the experiment: several constructions
+                    were useful only when the same pressure checks changed the
+                    next research move.
+                  </figcaption>
+                </figure>
+
+                <figure class="note-diagram" data-type="image" tabindex="8">
+                  <img
+                    src="../../post-images/unfinished-question-experiment-ladder.svg"
+                    alt="Schematic ladder from seed tension through baseline comparisons, checks, and evidence boundary"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The comparison was not which workflow looked smarter. It
+                    was whether any process created a sharper next action than
+                    simpler ways of asking.
+                  </figcaption>
+                </figure>
+
+                <figure class="note-diagram" data-type="image" tabindex="9">
+                  <img
+                    src="../../post-images/unfinished-question-experiment-lanes.png"
+                    alt="Clean schematic of multiple workflow routes moving through the same pressure checks"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The same comparison as a clean schematic: several routes
+                    can look different, but the action must pass through the
+                    same pressure boundary.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  Looking across the whole project, the most important pattern
+                  was not which construction looked most elaborate. It was that
+                  each evidential layer narrowed the claim. Calibration made the
+                  filters less gullible. Replaying saved outputs showed how many
+                  attractive frames still lacked an executable center. Local
+                  contact checks showed that a frame can sharpen a question
+                  without justifying the larger mechanism that produced it.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="10">
+                  <img
+                    src="../../post-images/unfinished-question-evidence-ladder.png"
+                    alt="Schematic evidence ladder from inventive models through calibration, saved-output replay, final local comparison, and evidence boundary"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The full experiment narrowed what could be claimed at each
+                    layer. Counts are pressure signals, not quality scores.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  Two numbers were especially clarifying. In a broad replay of
+                  saved candidates, only six of 122 cases reached a bounded
+                  local check; many stopped because they lacked executable
+                  parameters or a real control. In the final local comparison,
+                  six of 14 cases reached that kind of bounded check and the
+                  negative control was rejected, but the candidates converged
+                  around the same pause-and-reset test shape and simple typed
+                  baselines remained strong. These are not statistical success
+                  rates; they are audit counts from pressure tests. Their value
+                  was to sharpen one question without licensing a larger claim.
+                </p>
+
+                <p>
+                  The most useful result was negative in a productive sense. A
+                  lot of added structure improved bookkeeping. It helped record
+                  why an idea looked plausible, but it did not automatically
+                  make the next test better. Several different workflows also
+                  converged toward the same obvious test shape, which made their
+                  architectural differences less meaningful than they first
+                  appeared.
+                </p>
+
+                <p>
+                  The richer process mattered only when it forced a
+                  discriminating contrast: one observation that would separate
+                  two explanations, or one missing contact point that made
+                  further interpretation dishonest.
+                </p>
+
+                <h2 id="resistance">5. Make ideas meet resistance</h2>
+
+                <p>
+                  By "resistance" I mean any contact that can make a proposed
+                  frame change, split, or die. It can be a calculation, a
+                  simulation, a counterexample, a limiting case, a measurement,
+                  or even a precise statement that the required evidence is not
+                  available.
+                </p>
+
+                <p>
+                  The important point is that resistance must be stronger than a
+                  preference for good prose. A claim has not advanced merely
+                  because it has been restated in a cleaner vocabulary. It
+                  advances when some bounded action can put pressure on it.
+                </p>
+
+                <p>
+                  A useful pattern is:
+                </p>
+
+                <pre><code>unfinished tension
+  -> problem frame
+  -> next bounded action
+  -> check or clear blocker
+  -> observation
+  -> changed next move</code></pre>
+
+                <p>
+                  The "clear blocker" case is important. Sometimes the right
+                  outcome is not a result, but an honest statement that the
+                  required data, instrument, infrastructure, or experimental
+                  condition is missing. That is still better than pretending a
+                  local check, a preference score, or a beautiful explanation is
+                  enough.
+                </p>
+
+                <h2 id="example">6. A small example of a better question</h2>
+
+                <p>
+                  Consider a system that seems to remember its history. One
+                  explanation is kinetic: the memory is carried by a slowly
+                  relaxing internal variable. Another explanation is structural:
+                  the intervention has changed something more persistent in the
+                  system itself.
+                </p>
+
+                <p>
+                  A weak workflow might produce a long discussion of "memory,"
+                  "hysteresis," or "hidden state." A stronger workflow asks for
+                  an intervention that separates the explanations. For example:
+                  if we vary the duration of a pause and the duration of a reset,
+                  do we see gradual erasure consistent with kinetic relaxation,
+                  or a plateau suggesting that the relevant structure cannot be
+                  reset on that timescale?
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="11">
+                  <img
+                    src="../../post-images/unfinished-question-discriminating-test.svg"
+                    alt="Schematic of a two-intervention check separating gradual erasure from a persistent plateau"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    A better question names a contrast the world could answer:
+                    gradual erasure would point one way, a persistent plateau
+                    another.
+                  </figcaption>
+                </figure>
+
+                <figure class="note-diagram" data-type="image" tabindex="12">
+                  <img
+                    src="../../post-images/unfinished-question-discriminating-test-visual.png"
+                    alt="Visual intuition for separating gradual erasure from a persistent plateau"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The same fork as a visual sketch: the important point is
+                    not the drawing style, but the split between fading memory
+                    and persistent residue.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  The value of that question is not that it sounds sophisticated.
+                  The value is that it names a possible split in the world. It
+                  says what kind of observation would matter. It turns a vague
+                  mechanism into a testable contrast.
+                </p>
+
+                <p>
+                  This was the best kind of local signal the exercise produced:
+                  not proof, but a better fork. It changed the next action from
+                  "discuss memory" to "measure whether pause length encodes a
+                  continuous relaxation variable, and whether reset length
+                  erases the response or leaves a plateau." That is a real
+                  improvement in problem formation. It is still not external
+                  evidence.
+                </p>
+
+                <h2 id="evidence-boundary">7. Respect the evidence boundary</h2>
+
+                <p>
+                  The same example also shows where discipline is needed. A
+                  local toy check can be useful. It can sharpen the question and
+                  reveal whether a proposed intervention is even coherent. But
+                  it is not the same as external contact with data or an
+                  independent measurement process.
+                </p>
+
+                <p>
+                  This is where many AI-assisted workflows are tempted to keep
+                  going. They can add another review layer, another score,
+                  another report, another synthetic example. But if the missing
+                  piece is real contact, the honest move is to stop at the
+                  boundary rather than convert interpretation into evidence.
+                </p>
+
+                <p>
+                  The limitations matter. This was not a broad scientific
+                  benchmark, and it did not include independent domain-expert
+                  review or new external measurements. It used saved outputs,
+                  local deterministic checks, and one especially informative
+                  memory-like case. That is enough to extract method lessons,
+                  but not enough to claim that the workflow produces better
+                  science.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="13">
+                  <img
+                    src="../../post-images/unfinished-question-evidence-boundary.svg"
+                    alt="Schematic of the boundary between promising language and evidence"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    A local check can sharpen a question, but it should not be
+                    promoted into stronger evidence than it is.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  In the strongest local case, the workflow did produce
+                  something I would keep: a pause-and-reset fork that separated
+                  gradual kinetic erasure from persistent structural residue.
+                  That is exactly the kind of question-forming improvement I
+                  was looking for. But the remaining needed contact was outside
+                  the local artifact. Without data, a real measurement setup,
+                  or an independent measurement process, the right conclusion
+                  was: good question, insufficient evidence.
+                </p>
+
+                <h2 id="design-rules">8. Design rules I would keep</h2>
+
+                <p>
+                  The strongest lessons from building this kind of workflow were
+                  not about which prompt was cleverest. They were about the
+                  traps that make a system appear research-like without
+                  improving the research state.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="14">
+                  <img
+                    src="../../post-images/unfinished-question-failure-map.svg"
+                    alt="Schematic map of failure modes and countermeasures in AI-assisted problem formation"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    Failure modes should be named in operational terms: what
+                    exactly prevents the idea from changing the next action?
+                  </figcaption>
+                </figure>
+
+                <p>
+                  The first lesson is that structure is necessary but not
+                  sufficient. A system can fill fields, produce clean diagrams,
+                  and name a plausible test while still failing to create a
+                  stronger next move. Structure helps only when it forces the
+                  question to specify a variable, a control, a possible
+                  observation, and a way the frame could be revised.
+                </p>
+
+                <p>
+                  The second lesson is that review criteria should be treated as
+                  brakes, not as rewards. They can catch vague protocols,
+                  unsupported claims, missing controls, and decorative
+                  metaphors. But passing those checks does not mean the idea has
+                  scientific value. It only means the artifact is less likely to
+                  be misleading.
+                </p>
+
+                <p>
+                  A related lesson is that calibration and generation are
+                  different achievements. A filter can correctly reject fluent
+                  foils and still say nothing about whether the workflow can
+                  produce a non-obvious next action. The generator has to be
+                  tested separately, preferably by replaying saved outputs under
+                  stricter rules than the ones that produced them.
+                </p>
+
+                <p>
+                  The third lesson is that simple baselines are more important
+                  than they feel. If a careful checklist, a direct prompt, or a
+                  plain typed note produces the same intervention, then the
+                  elaborate workflow has not earned its complexity. The burden
+                  is on the richer process to create a different next action, a
+                  sharper split, or a better stopping condition.
+                </p>
+
+                <p>
+                  The fourth lesson is that labels can contaminate interpretation.
+                  A name borrowed from physics, statistics, or systems theory
+                  can make an ordinary idea look deeper than it is. The test is
+                  whether the label does operational work: does it add a
+                  variable, a constraint, a control, or a failure mode?
+                </p>
+
+                <p>
+                  The fifth lesson is that a useful local check should be
+                  respected but contained. It can sharpen a question and reveal
+                  whether an intervention makes sense. It should not be promoted
+                  into external evidence unless it has actually made contact
+                  with the relevant data, system, or measurement process.
+                </p>
+
+                <p>
+                  The sixth lesson is that apparent workflow diversity can
+                  collapse into the same attractor. If direct prompts,
+                  checklists, and richer workflows all produce the same test
+                  shape, the lesson is not that the elaborate workflow has
+                  proved itself. The lesson is that the problem itself may be
+                  pulling everyone toward an obvious next move, or that the
+                  workflow labels are steering the outputs.
+                </p>
+
+                <p>
+                  The seventh lesson is that figures should be treated as
+                  arguments, not decoration. A useful schematic removes
+                  unnecessary detail until the structure of the decision is
+                  visible: alternatives, checks, evidence boundary, and possible
+                  next action.
+                </p>
+
+                <p>
+                  The eighth lesson is that stopping can be the most important
+                  output of the workflow. A missing external contact point is
+                  not an invitation to add another synthetic review layer. It
+                  is information about what the idea still lacks.
+                </p>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Rule</th>
+                      <th>Why it matters</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Preserve unresolved residue.</td>
+                      <td>
+                        Do not let summaries erase the part of the problem that
+                        still does not make sense.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Demand a discriminating action.</td>
+                      <td>
+                        A next step should separate alternatives, not merely
+                        gather more agreeable context.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Treat evaluation as a brake.</td>
+                      <td>
+                        Review criteria can catch weak artifacts, but they
+                        should not become evidence of scientific value.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Separate calibration from evidence.</td>
+                      <td>
+                        A filter passing hand-built examples means it is less
+                        gullible, not that the generator forms better questions.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Replay saved outputs under stricter rules.</td>
+                      <td>
+                        Re-reading old artifacts often reveals missing controls,
+                        missing parameters, or shape convergence.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Compare against simple baselines.</td>
+                      <td>
+                        If a complex workflow only reproduces what a simple
+                        prompt or typed checklist would do, the complexity is
+                        not justified.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Stop at missing contact.</td>
+                      <td>
+                        When the next necessary step is data, measurement, or an
+                        experiment, do not replace it with another report.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Treat blockers as evidence about the workflow.</td>
+                      <td>
+                        A precise blocker can be useful, but repeated blockers
+                        mean the method is no longer testing the idea.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Watch for shape convergence.</td>
+                      <td>
+                        Different workflows that produce the same obvious next
+                        test have not shown distinct problem-forming power.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Make diagrams earn their place.</td>
+                      <td>
+                        A figure should clarify the decision structure, not
+                        merely decorate the argument.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <figure class="note-diagram" data-type="image" tabindex="15">
+                  <img
+                    src="../../post-images/unfinished-question-keep-stop-checklist.svg"
+                    alt="Keep-or-stop checklist for AI-generated research ideas"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    A compact keep-or-stop checklist for research ideas
+                    generated or refined with language models.
+                  </figcaption>
+                </figure>
+
+                <h2 id="what-ai-can-do">
+                  9. What AI can still be good for
+                </h2>
+
+                <p>
+                  None of this makes AI useless for research. Quite the
+                  opposite: language models can be very helpful at turning a
+                  vague tension into candidate frames, surfacing controls,
+                  proposing toy models, generating alternative explanations,
+                  and checking whether a planned test actually distinguishes
+                  the alternatives.
+                </p>
+
+                <p>
+                  But that usefulness is highest when the workflow is designed
+                  around resistance. The model should not be asked only to
+                  explain. It should be asked to help expose what would make the
+                  explanation fail, what would make two mechanisms diverge, and
+                  what missing evidence prevents a stronger claim.
+                </p>
+
+                <p>
+                  The practical ambition is modest but important: build tools
+                  that protect good unfinished questions from being prematurely
+                  closed by fluent language.
+                </p>
+
+                <p>
+                  The contribution I would keep is a criterion, not a finished
+                  system: preserve unresolvedness only when it can be translated
+                  into a variable, a contrast, a bounded action, a possible
+                  observation, and a reason to stop. Without that chain, the
+                  workflow is only improving the story around the question.
+                </p>
+
+                <h2 id="closing">10. The discipline of stopping</h2>
+
+                <p>
+                  The most valuable part of a research workflow may be its
+                  ability to say: this is interesting, but not enough. The
+                  question is sharper than before, but the evidence has not
+                  crossed the boundary. The next honest step is not another
+                  layer of interpretation, but a stronger form of contact.
+                </p>
+
+                <p>
+                  That stopping discipline is not pessimism. It is how an
+                  unfinished question stays useful. It remains alive not because
+                  it is protected from failure, but because it is kept close to
+                  the conditions under which it could fail.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="next-post">
+          <div class="next">Next</div>
+          <a href="../git-tutor/">
+            <h3 class="post-title">Git Tutor</h3>
+          </a>
+        </div>
+
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/gitalk/dist/gitalk.css"
+        />
+        <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+        <div id="gitalk-container"></div>
+
+        <script>
+          var gitalk = new Gitalk({
+            clientID: "a5e6f6ea93722a200403",
+            clientSecret: "0b51983f55aa43a6a1376e52a5f9e5099bdfb23c",
+            repo: "imichaelen.github.io",
+            owner: "imichaelen",
+            admin: ["imichaelen"],
+            id: location.pathname.substring(0, 49),
+            distractionFreeMode: false,
+          });
+
+          gitalk.render("gitalk-container");
+        </script>
+
+        <div class="site-footer">
+          <a
+            class="rss"
+            href="../../atom.xml"
+            target="_blank"
+          >
+            <i class="ri-rss-line"></i> RSS
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
