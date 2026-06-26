@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Five roles taking turns on one unfinished tension</title>
+  <desc id="desc">An unfinished tension on the left is passed through a workshop of five roles — problem-former, toy-builder, counterexample-hunter, boringness-critic, and reconstructor — and comes out as a sharper, testable fork on the right.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#315f64"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="620" fill="#f7f4ee"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="72" y="64" fill="#213437" font-size="28" font-weight="700">Five roles, one unfinished tension</text>
+    <text x="72" y="98" fill="#627173" font-size="17">The workflow was a small cast taking turns on the same problem — closer to a study group arguing than an oracle explaining.</text>
+
+    <rect x="60" y="300" width="184" height="120" rx="8" fill="#fff8ec" stroke="#d7a15a"/>
+    <text x="152" y="352" text-anchor="middle" fill="#22383b" font-size="19" font-weight="700">Unfinished</text>
+    <text x="152" y="378" text-anchor="middle" fill="#22383b" font-size="19" font-weight="700">tension</text>
+    <text x="152" y="402" text-anchor="middle" fill="#6f5b38" font-size="13">a residue that won't close</text>
+
+    <rect x="360" y="150" width="470" height="420" rx="10" fill="#f0ece3" stroke="#d8cfbf"/>
+    <text x="384" y="180" fill="#59686a" font-size="16" font-weight="700">The workshop — the roles take turns</text>
+
+    <g>
+      <rect x="384" y="196" width="422" height="64" rx="7" fill="#fffdf8" stroke="#d0c5b5"/>
+      <text x="404" y="224" fill="#22383b" font-size="18" font-weight="700">Problem-former</text>
+      <text x="404" y="247" fill="#687779" font-size="14">names the real question hiding in the mess</text>
+
+      <rect x="384" y="268" width="422" height="64" rx="7" fill="#fffdf8" stroke="#d0c5b5"/>
+      <text x="404" y="296" fill="#22383b" font-size="18" font-weight="700">Toy-builder</text>
+      <text x="404" y="319" fill="#687779" font-size="14">builds the smallest model that would show it</text>
+
+      <rect x="384" y="340" width="422" height="64" rx="7" fill="#fffdf8" stroke="#d0c5b5"/>
+      <text x="404" y="368" fill="#22383b" font-size="18" font-weight="700">Counterexample-hunter</text>
+      <text x="404" y="391" fill="#687779" font-size="14">tries to break the model</text>
+
+      <rect x="384" y="412" width="422" height="64" rx="7" fill="#fffdf8" stroke="#d0c5b5"/>
+      <text x="404" y="440" fill="#22383b" font-size="18" font-weight="700">Boringness-critic</text>
+      <text x="404" y="463" fill="#687779" font-size="14">is this just the obvious answer in fancier words?</text>
+
+      <rect x="384" y="484" width="422" height="64" rx="7" fill="#fffdf8" stroke="#d0c5b5"/>
+      <text x="404" y="512" fill="#22383b" font-size="18" font-weight="700">Reconstructor</text>
+      <text x="404" y="535" fill="#687779" font-size="14">keeps only what survived the beating</text>
+    </g>
+
+    <rect x="952" y="300" width="196" height="120" rx="8" fill="#e7f2f0" stroke="#77aaa5"/>
+    <text x="1050" y="352" text-anchor="middle" fill="#22383b" font-size="19" font-weight="700">A sharper,</text>
+    <text x="1050" y="378" text-anchor="middle" fill="#22383b" font-size="19" font-weight="700">testable fork</text>
+    <text x="1050" y="402" text-anchor="middle" fill="#4d6c70" font-size="13">a contrast the world can answer</text>
+
+    <g stroke="#315f64" stroke-width="3" fill="none" marker-end="url(#arrow)">
+      <path d="M248 360 H356"/>
+      <path d="M834 360 H948"/>
+    </g>
+  </g>
+</svg>

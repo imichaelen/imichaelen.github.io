@@ -288,6 +288,73 @@
                   </figcaption>
                 </figure>
 
+                <p>
+                  Here is what that looked like in practice, because the idea is
+                  easier to feel than to define. The workflow was not one model
+                  answering a prompt. It was a small cast of roles taking turns
+                  on the same unfinished tension, each trying to do something the
+                  others could not — closer to a study group arguing than to an
+                  oracle explaining.
+                </p>
+
+                <ul>
+                  <li>
+                    <strong>The problem-former</strong> tries to name the real
+                    question hiding inside a vague unease.
+                  </li>
+                  <li>
+                    <strong>The toy-builder</strong> builds the smallest model
+                    that would actually show the effect.
+                  </li>
+                  <li>
+                    <strong>The counterexample-hunter</strong> tries to break
+                    that model before anyone gets attached to it.
+                  </li>
+                  <li>
+                    <strong>The boringness-critic</strong> keeps asking the rude
+                    question: is this just the obvious answer in fancier words?
+                  </li>
+                  <li>
+                    <strong>The reconstructor</strong> keeps only what survived
+                    the beating and hands it back, sharper.
+                  </li>
+                </ul>
+
+                <p>
+                  Two pieces of vocabulary make the rest of this readable. A
+                  frame is <em>action-changing</em> when it changes the next
+                  experiment, not merely the wording of the story. And
+                  <em>resistance</em> is shorthand for any contact — a control, a
+                  calculation, a toy that can fail — that can make a proposed
+                  frame change, split, or die. The whole game is to push a vague
+                  tension until it meets something that can push back.
+                </p>
+
+                <figure class="note-diagram" data-type="image">
+                  <img
+                    src="../../post-images/unfinished-question-personas.svg"
+                    alt="Five roles — problem-former, toy-builder, counterexample-hunter, boringness-critic, and reconstructor — taking turns on one unfinished tension to produce a sharper, testable fork"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The playful core of the experiment: a small cast of roles
+                    takes turns on the same tension, each trying to do something
+                    the others cannot.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  A concrete run looked like this. Hand the cast a system that
+                  seems to "remember" its history, and the interesting move is
+                  not a long essay on memory; it is the toy-builder and
+                  counterexample-hunter together forcing the question into a fork
+                  the world could answer — gradual erasure consistent with a
+                  slowly relaxing internal variable, or a plateau suggesting a
+                  structure that cannot be reset on that timescale. Section 6
+                  walks that fork out in full. The point here is the texture: the
+                  value came from the roles refusing to let a smooth story stand.
+                </p>
+
                 <h2 id="system-interest">
                   2. Interest is behavior, not psychology
                 </h2>
@@ -341,24 +408,55 @@
                 </h2>
 
                 <p>
-                  A lot of the design intuition came from physics: energy
-                  landscapes, frustration, phase changes, hysteresis,
-                  coarse-graining, and memory. Those words are attractive
-                  because they suggest that a research process might have
-                  structure: local traps, unresolved stress, slow relaxation,
-                  and transitions between regimes.
+                  A lot of the design intuition came from physics, and this was
+                  the part that was the most fun to build. It is tempting — and
+                  genuinely useful — to picture the space of half-formed research
+                  frames as a physical system: a landscape with valleys where a
+                  story has settled, ridges that are hard to cross, frustration
+                  where competing constraints cannot all be satisfied at once,
+                  and phase changes where a small push flips the whole picture.
                 </p>
 
                 <p>
-                  But the experiment taught me to distrust the words unless
-                  they changed an operation. "Energy" was not allowed to mean
-                  "how much I like this idea." "Frustration" was not allowed to
-                  mean "several agents disagree." A physics-inspired concept
-                  had to name a variable, a control, a falsifying test, or a
-                  state update. Otherwise it was decoration.
+                  The most ambitious version pushed this all the way. Treat each
+                  candidate frame as a state. Let frames that pull in different
+                  directions be coupled, like spins in an Ising model, so that a
+                  configuration carries an "energy" — how much unresolved tension
+                  it holds. Then wander that space with Monte Carlo or annealing
+                  moves: accept a jump that lowers the energy, and occasionally
+                  accept an uphill one to climb out of a shallow, tidy trap. For
+                  a while the workflow really was a little statistical-mechanics
+                  sandbox for ideas, with branches coupled in a mesh and a
+                  running log of accepted and rejected moves.
                 </p>
 
                 <figure class="note-diagram" data-type="image" tabindex="4">
+                  <img
+                    src="../../post-images/unfinished-question-idea-energy-landscape.svg"
+                    alt="The space of half-formed frames drawn as an energy landscape with a shallow trap and a deeper valley, explored with Monte-Carlo moves: an accepted downhill move and an occasional uphill move to escape a shallow trap"
+                    loading="lazy"
+                  />
+                  <figcaption class="caption">
+                    The most ambitious version treated ideas as a physical
+                    system — Ising-like coupling, an energy for unresolved
+                    tension, Monte-Carlo moves through the space. It was the most
+                    fun part to build.
+                  </figcaption>
+                </figure>
+
+                <p>
+                  The binding test, though, was operational. A physics-inspired
+                  concept had to name a variable, a control, a falsifying test,
+                  or a state update before it could touch a decision. "Energy"
+                  was not allowed to mean "how much I like this idea";
+                  "frustration" was not allowed to mean "several agents
+                  disagree." If a metaphor cleared that bar it shaped the
+                  workflow; if it did not, it stayed a design intuition rather
+                  than a decision variable. That was not a betrayal of the
+                  imagination work — it was the next honest test.
+                </p>
+
+                <figure class="note-diagram" data-type="image" tabindex="5">
                   <img
                     src="../../post-images/unfinished-question-physics-translation.svg"
                     alt="Schematic translating physics-inspired words into variables, controls, falsifying tests, and state updates"
@@ -371,36 +469,23 @@
                 </figure>
 
                 <p>
-                  The earliest version was more ambitious: Ising-like state
-                  graphs, energy and frustration scores, phase-shift metrics,
-                  Monte Carlo or annealing search, and mesh-like interaction
-                  between branches. I still think those are useful imagination
-                  tools. The experiment changed their status. They were no
-                  longer allowed to be claims about creativity; they became
-                  hypotheses about control. Each one had to say what it would
-                  measure, what move it would accept or reject, and what
-                  simpler baseline it had to beat.
+                  So the Ising graphs, the energy and frustration scores, the
+                  Monte Carlo and annealing search, the mesh between branches
+                  were excellent thinking aids — they shaped how I approached the
+                  problem, and they were a pleasure to build. As mechanisms,
+                  though, each owed an answer to one question: what does it
+                  measure, which move does it accept or reject, and which simpler
+                  baseline does it have to beat? On that question they remained
+                  diagnostic — useful for intuition and logging, never graduated
+                  to decision variables, and deliberately kept switched off until
+                  something simpler could first show value.
                 </p>
 
-                <figure class="note-diagram" data-type="image" tabindex="5">
-                  <img
-                    src="../../post-images/unfinished-question-physics-models.png"
-                    alt="Schematic summary of Ising-like graphs, energy, frustration, phase shifts, Monte Carlo, mesh search, and coarse-graining as operational hypotheses"
-                    loading="lazy"
-                  />
-                  <figcaption class="caption">
-                    The original physics-inspired models were not discarded.
-                    They were demoted into operational hypotheses that had to
-                    earn their place.
-                  </figcaption>
-                </figure>
-
                 <p>
-                  The clearest survivor was coarse-graining: it helped name a
-                  pause-and-reset fork between temporary kinetic memory and a
-                  more structural residue. That was a good question, not a
-                  finished result. The rest remained diagnostic or paused until
-                  a simpler loop could show action-changing value.
+                  The clearest survivor was the humblest one: coarse-graining. It
+                  helped name a pause-and-reset fork between temporary kinetic
+                  memory and a more structural residue. That was a good question,
+                  not a finished result. Everything more elaborate stayed paused.
                 </p>
 
                 <h2 id="what-was-tested">4. What I actually tested</h2>
@@ -486,40 +571,15 @@
 
                 <figure class="note-diagram" data-type="image" tabindex="7">
                   <img
-                    src="../../post-images/unfinished-question-experiment-atlas.png"
-                    alt="Schematic map of generation, comparison, filtering, pushback, and stopping lessons from the experiment"
+                    src="../../post-images/unfinished-question-route-comparison.svg"
+                    alt="The same seed tension sent through a direct prompt and through the multi-agent workflow, both arriving at the same pause-and-reset fork — a null result"
                     loading="lazy"
                   />
                   <figcaption class="caption">
-                    A compact matrix of the experiment: several constructions
-                    were useful only when the same pressure checks changed the
-                    next research move.
-                  </figcaption>
-                </figure>
-
-                <figure class="note-diagram" data-type="image" tabindex="8">
-                  <img
-                    src="../../post-images/unfinished-question-experiment-ladder.svg"
-                    alt="Schematic ladder from seed tension through baseline comparisons, checks, and evidence boundary"
-                    loading="lazy"
-                  />
-                  <figcaption class="caption">
-                    The comparison was not which workflow looked smarter. It
-                    was whether any process created a sharper next action than
-                    simpler ways of asking.
-                  </figcaption>
-                </figure>
-
-                <figure class="note-diagram" data-type="image" tabindex="9">
-                  <img
-                    src="../../post-images/unfinished-question-experiment-lanes.png"
-                    alt="Clean schematic of multiple workflow routes moving through the same pressure checks"
-                    loading="lazy"
-                  />
-                  <figcaption class="caption">
-                    The same comparison as a clean schematic: several routes
-                    can look different, but the action must pass through the
-                    same pressure boundary.
+                    The comparison that mattered: a direct prompt and the
+                    multi-agent workflow reached the same pause-and-reset fork.
+                    When the simple route lands in the same place, the elaborate
+                    one has to justify itself — and here it did not.
                   </figcaption>
                 </figure>
 
@@ -559,12 +619,14 @@
                 </p>
 
                 <p>
-                  Stated plainly, this was a null result. A direct typed
-                  checklist asking for a single discriminating observation
-                  reached the same pause-and-reset fork as the richer
-                  multi-agent route. When a simpler construction lands in the
-                  same place, the elaborate one has to justify itself by doing
-                  something the simple one cannot — and here it did not.
+                  The most telling moment of the experiment was also its most
+                  deflating, and it is worth saying plainly: this was a null
+                  result. A direct typed checklist asking for a single
+                  discriminating observation reached the same pause-and-reset
+                  fork as the richer multi-agent route. When a simpler
+                  construction lands in the same place, the elaborate one has to
+                  justify itself by doing something the simple one cannot — and
+                  here it did not.
                 </p>
 
                 <p>
