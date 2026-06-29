@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">A keep-or-stop checklist for AI-generated research ideas</title>
+  <desc id="desc">A checklist for deciding whether an AI-generated research idea should be continued, repaired, or stopped.</desc>
+  <rect width="1200" height="640" fill="#fbfaf7"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="72" y="72" fill="#20363a" font-size="31" font-weight="700">Before keeping an AI-generated idea, ask what it changes</text>
+    <text x="72" y="108" fill="#627174" font-size="17">A good frame should not only be plausible. It should create a bounded next action and a reason to revise.</text>
+
+    <g>
+      <rect x="72" y="155" width="480" height="360" rx="10" fill="#eef6f5" stroke="#6d9d9a" stroke-width="2"/>
+      <text x="104" y="198" fill="#20363a" font-size="24" font-weight="700">Keep or repair</text>
+      <text x="104" y="236" fill="#36595d" font-size="17">The idea deserves another step if it can answer:</text>
+
+      <circle cx="122" cy="282" r="10" fill="#6d9d9a"/>
+      <text x="150" y="288" fill="#20363a" font-size="17">What variable or condition will be changed?</text>
+      <circle cx="122" cy="328" r="10" fill="#6d9d9a"/>
+      <text x="150" y="334" fill="#20363a" font-size="17">What observation would separate alternatives?</text>
+      <circle cx="122" cy="374" r="10" fill="#6d9d9a"/>
+      <text x="150" y="380" fill="#20363a" font-size="17">What control prevents a cheap pass?</text>
+      <circle cx="122" cy="420" r="10" fill="#6d9d9a"/>
+      <text x="150" y="426" fill="#20363a" font-size="17">What result would change the frame?</text>
+      <circle cx="122" cy="466" r="10" fill="#6d9d9a"/>
+      <text x="150" y="472" fill="#20363a" font-size="17">What follows after the observation?</text>
+    </g>
+
+    <g>
+      <rect x="648" y="155" width="480" height="360" rx="10" fill="#fff2e8" stroke="#c68463" stroke-width="2"/>
+      <text x="680" y="198" fill="#20363a" font-size="24" font-weight="700">Stop</text>
+      <text x="680" y="236" fill="#765747" font-size="17">Do not promote it when the next move is only:</text>
+
+      <path d="M690 272 L710 292 M710 272 L690 292" stroke="#b36853" stroke-width="4" stroke-linecap="round"/>
+      <text x="738" y="288" fill="#20363a" font-size="17">More polished prose</text>
+      <path d="M690 318 L710 338 M710 318 L690 338" stroke="#b36853" stroke-width="4" stroke-linecap="round"/>
+      <text x="738" y="334" fill="#20363a" font-size="17">Another score without contact</text>
+      <path d="M690 364 L710 384 M710 364 L690 384" stroke="#b36853" stroke-width="4" stroke-linecap="round"/>
+      <text x="738" y="380" fill="#20363a" font-size="17">A metaphor with no variables</text>
+      <path d="M690 410 L710 430 M710 410 L690 430" stroke="#b36853" stroke-width="4" stroke-linecap="round"/>
+      <text x="738" y="426" fill="#20363a" font-size="17">Local toy output used as evidence</text>
+      <path d="M690 456 L710 476 M710 456 L690 476" stroke="#b36853" stroke-width="4" stroke-linecap="round"/>
+      <text x="738" y="472" fill="#20363a" font-size="17">A workflow matching a simple baseline</text>
+    </g>
+
+    <rect x="280" y="552" width="640" height="52" rx="8" fill="#ffffff" stroke="#d5caba" stroke-width="2"/>
+    <text x="600" y="584" text-anchor="middle" fill="#20363a" font-size="18" font-weight="700">Continue only when the research state changes.</text>
+  </g>
+</svg>

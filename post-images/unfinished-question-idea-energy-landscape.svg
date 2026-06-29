@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Ideas as an energy landscape explored with Monte-Carlo moves</title>
+  <desc id="desc">The space of half-formed research frames drawn as an energy landscape with a shallow trap and a deeper valley. A solid arrow shows a downhill move that lowers tension; a dashed arrow shows an occasional uphill move accepted to escape a shallow trap. The most ambitious version of the workflow wandered this space with Monte-Carlo or annealing moves.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#315f64"/>
+    </marker>
+    <marker id="arrowA" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#c98a3c"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="560" fill="#f7f4ee"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="72" y="58" fill="#213437" font-size="28" font-weight="700">Ideas as an energy landscape</text>
+    <text x="72" y="90" fill="#627173" font-size="17">The most ambitious version wandered the space of half-formed frames with Monte-Carlo moves — then had to earn it.</text>
+
+    <line x1="120" y1="134" x2="156" y2="134" stroke="#315f64" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="166" y="139" fill="#3f5f63" font-size="14">accepted move — lowers the tension</text>
+    <line x1="560" y1="134" x2="596" y2="134" stroke="#c98a3c" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrowA)"/>
+    <text x="606" y="139" fill="#8a6d3e" font-size="14">uphill move — occasionally accepted, to escape a shallow trap</text>
+
+    <path d="M120 300 C200 360 260 380 320 382 C420 384 480 272 560 252 C660 250 740 412 820 432 C900 446 1000 402 1100 360 L1100 480 L120 480 Z" fill="#efe9df"/>
+    <path d="M120 300 C200 360 260 380 320 382 C420 384 480 272 560 252 C660 250 740 412 820 432 C900 446 1000 402 1100 360" fill="none" stroke="#9c8f78" stroke-width="3"/>
+
+    <text x="560" y="230" text-anchor="middle" fill="#8a6d3e" font-size="13" font-style="italic">frames that pull against each other (Ising-like) → high tension</text>
+
+    <circle cx="320" cy="382" r="10" fill="#d7a15a" stroke="#9c6f2e" stroke-width="2"/>
+    <circle cx="820" cy="432" r="10" fill="#77aaa5" stroke="#3f7a74" stroke-width="2"/>
+
+    <g fill="none">
+      <path d="M331 372 Q448 300 546 262" stroke="#c98a3c" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrowA)"/>
+      <path d="M572 260 Q700 304 806 418" stroke="#315f64" stroke-width="3" marker-end="url(#arrow)"/>
+    </g>
+
+    <text x="320" y="412" text-anchor="middle" fill="#6f5b38" font-size="14" font-weight="700">shallow trap</text>
+    <text x="320" y="432" text-anchor="middle" fill="#8a7a5c" font-size="12">a tidy but shallow story</text>
+    <text x="820" y="464" text-anchor="middle" fill="#3f6a66" font-size="14" font-weight="700">a deeper valley — a sharper fork</text>
+
+    <text x="600" y="528" text-anchor="middle" fill="#687779" font-size="13">configurations of half-formed frames &#8594;</text>
+    <text x="58" y="360" transform="rotate(-90 58 360)" text-anchor="middle" fill="#687779" font-size="13">tension (energy) &#8593;</text>
+  </g>
+</svg>

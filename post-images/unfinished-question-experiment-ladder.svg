@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Experiment ladder for testing whether a workflow changes the next action</title>
+  <desc id="desc">A labelled schematic showing an unfinished physical question moving through baseline comparisons, filter checks, resistance chains, and an evidence boundary.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#315f64"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="720" fill="#fbfaf7"/>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="72" y="72" fill="#20363a" font-size="31" font-weight="700">The experiment was a ladder, not a beauty contest</text>
+    <text x="72" y="108" fill="#627174" font-size="17">Each step asked whether the next research action became sharper than a simpler baseline.</text>
+
+    <g stroke="#315f64" stroke-width="3" fill="none" marker-end="url(#arrow)">
+      <path d="M224 222 H296"/>
+      <path d="M904 222 H976"/>
+      <path d="M600 300 V366"/>
+      <path d="M600 472 V540"/>
+    </g>
+
+    <g>
+      <rect x="72" y="162" width="152" height="120" rx="8" fill="#ffffff" stroke="#b9c4c5" stroke-width="2"/>
+      <text x="148" y="196" text-anchor="middle" fill="#20363a" font-size="18" font-weight="700">Seed tension</text>
+      <text x="148" y="226" text-anchor="middle" fill="#627174" font-size="14">
+        <tspan x="148" dy="0">a physical response</tspan>
+        <tspan x="148" dy="20">appears to remember</tspan>
+        <tspan x="148" dy="20">its history</tspan>
+      </text>
+    </g>
+
+    <g>
+      <rect x="296" y="142" width="608" height="160" rx="10" fill="#eef6f5" stroke="#6d9d9a" stroke-width="2"/>
+      <text x="600" y="178" text-anchor="middle" fill="#20363a" font-size="20" font-weight="700">Generate candidate frames under comparable budgets</text>
+      <rect x="328" y="206" width="150" height="62" rx="7" fill="#ffffff" stroke="#aab8ba"/>
+      <text x="403" y="232" text-anchor="middle" fill="#20363a" font-size="15" font-weight="700">Direct prompt</text>
+      <text x="403" y="254" text-anchor="middle" fill="#667578" font-size="13">cheap baseline</text>
+      <rect x="525" y="206" width="150" height="62" rx="7" fill="#ffffff" stroke="#aab8ba"/>
+      <text x="600" y="232" text-anchor="middle" fill="#20363a" font-size="15" font-weight="700">Typed notebook</text>
+      <text x="600" y="254" text-anchor="middle" fill="#667578" font-size="13">strong baseline</text>
+      <rect x="722" y="206" width="150" height="62" rx="7" fill="#ffffff" stroke="#aab8ba"/>
+      <text x="797" y="232" text-anchor="middle" fill="#20363a" font-size="15" font-weight="700">Richer workflow</text>
+      <text x="797" y="254" text-anchor="middle" fill="#667578" font-size="13">must earn complexity</text>
+    </g>
+
+    <g>
+      <rect x="976" y="162" width="152" height="120" rx="8" fill="#fff5e7" stroke="#d7a15a" stroke-width="2"/>
+      <text x="1052" y="196" text-anchor="middle" fill="#20363a" font-size="18" font-weight="700">Same test</text>
+      <text x="1052" y="226" text-anchor="middle" fill="#6f5b38" font-size="14">
+        <tspan x="1052" dy="0">does it change</tspan>
+        <tspan x="1052" dy="20">the next action?</tspan>
+      </text>
+    </g>
+
+    <g>
+      <rect x="180" y="366" width="840" height="106" rx="10" fill="#ffffff" stroke="#d4cabd" stroke-width="2"/>
+      <text x="600" y="400" text-anchor="middle" fill="#20363a" font-size="20" font-weight="700">Filter checks rejected research-shaped prose</text>
+      <text x="600" y="432" text-anchor="middle" fill="#627174" font-size="15">
+        <tspan x="600" dy="0">A candidate had to name a variable, a control, a failure condition, and a bounded check.</tspan>
+        <tspan x="600" dy="22">Scores, elegant language, and completed forms were diagnostics only.</tspan>
+      </text>
+    </g>
+
+    <g>
+      <rect x="180" y="540" width="840" height="112" rx="10" fill="#fff1e8" stroke="#bd745d" stroke-width="2"/>
+      <text x="600" y="574" text-anchor="middle" fill="#20363a" font-size="20" font-weight="700">The stopping lesson</text>
+      <text x="600" y="606" text-anchor="middle" fill="#765747" font-size="15">
+        <tspan x="600" dy="0">One local check sharpened a real question, but it did not cross the evidence boundary.</tspan>
+        <tspan x="600" dy="22">When the next needed thing is external contact, another report is not progress.</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
